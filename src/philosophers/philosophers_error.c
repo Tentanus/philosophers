@@ -6,14 +6,25 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:50:21 by mweverli      #+#    #+#                 */
-/*   Updated: 2022/12/06 20:05:47 by mweverli      ########   odam.nl         */
+/*   Updated: 2022/12/19 13:57:32 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-void	philo_error(void)
+const char	philo_error_message(int code)
 {
-	write(2, "ERROR\n", 6);
+	const char	*message[] = {
+		[ARGUMENTS] = "Give 4 or 5 arguments",
+		[INPUT] = "Give an unsigned int as input"
+	}
+	return (message[code]);
+}
+
+void	philo_error(int code)
+{
+	if (!code)
+		exit(EXIT_SUCCESS);
+	ph_putendl_fd(philo_error_message(code), STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2022/12/06 22:17:29 by mweverli      ########   odam.nl         */
+/*   Updated: 2022/12/19 13:58:51 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 # include <limits.h>
 
 //		PERSONAL INCLUDES
+# include <stdio.h>
 
-//	STRUCTURES
+//	STRUCTURES AND ENUMS
 typedef struct s_philo {
 	uint32_t	n_philo;
 	uint32_t	t_die;
@@ -33,6 +34,11 @@ typedef struct s_philo {
 	uint32_t	n_meal;
 }	t_philo;
 
+typedef enum e_message {
+	SUCCESS,
+	ARGUMENTS,
+	INPUT
+}	t_message;
 
 //	FUNCTIONS
 

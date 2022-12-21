@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2022/12/06 22:17:26 by mweverli      ########   odam.nl          #
+#    Updated: 2022/12/08 13:02:17 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ RESET	:= \033[0m
 
 INCLUDE		:=	-I $(INC_DIR)
 
-LIBRARY		:=#-lpthread
+LIBRARY		:=	#-lpthread
 
 ifdef DEBUG
 CFL			:=	-Wall -Werror -Wextra -g -fsanitize=address
