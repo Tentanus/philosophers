@@ -6,22 +6,22 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:50:21 by mweverli      #+#    #+#                 */
-/*   Updated: 2022/12/19 13:57:32 by mweverli      ########   odam.nl         */
+/*   Updated: 2022/12/22 15:36:06 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-const char	philo_error_message(int code)
+const char	*philo_error_message(int code)
 {
 	const char	*message[] = {
 		[ARGUMENTS] = "Give 4 or 5 arguments",
 		[INPUT] = "Give an unsigned int as input"
-	}
+	};
 	return (message[code]);
 }
 
-void	philo_error(int code)
+int	philo_error(int code)
 {
 	if (!code)
 		exit(EXIT_SUCCESS);

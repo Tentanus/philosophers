@@ -6,11 +6,13 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/19 13:43:13 by mweverli      #+#    #+#                 */
-/*   Updated: 2022/12/19 13:58:33 by mweverli      ########   odam.nl         */
+/*   Updated: 2022/12/21 15:59:03 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-uint32_t	ph_strlen(char *inp)
+#include <philosophers.h>
+
+int32_t	ph_strlen(const char *inp)
 {
 	int	i;
 
@@ -24,20 +26,19 @@ uint32_t	ph_strlen(char *inp)
 
 void	ph_putendl_fd(const char *str, int fd)
 {
-	if (!s)
+	if (!str)
 		return(ph_putendl_fd("(null)", fd));
-	i = ph_strlen(s);
-	write(fd, s, i);
+	write(fd, str, ph_strlen(str));
 	write(fd, "\n", 1);
 }
 
-uint32_t	ph_atoi(char *inp)
+int32_t	ph_atoi(char *inp)
 {
 	int		i;
 	long	res;
 
 	if (inp[0] == '-' || ph_strlen(inp) > 10)
-		philo_error(INPUT);
+		return (-1);
 	i = 0;
 	res = 0;
 	if (inp[0] == '+')
@@ -47,7 +48,7 @@ uint32_t	ph_atoi(char *inp)
 		res = res * 10 + (inp[i] - '0');
 		i++;
 	}
-	if (inp[i] != '\0' || res > UINT_MAX || res < 1)
-		philo_error(INPUT);
+	if (inp[i] != '\0' || res > INT_MAX || res < -1)
+		return (-1);
 	return (res);
 }
