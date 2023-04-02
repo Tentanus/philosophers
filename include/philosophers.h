@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2022/12/22 15:36:32 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/04/02 19:46:53 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@
 //	STRUCTURES AND ENUMS
 typedef struct s_philo {
 	int32_t	n_philo;
+	int32_t	n_meal;
 	int32_t	t_die;
 	int32_t	t_eat;
 	int32_t	t_sleep;
-	int32_t	n_meal;
 }	t_philo;
 
 typedef struct s_shared {
 	bool	death;
 	bool	start;
 	bool	error;
-
 }	t_shared;
+
 typedef enum e_message {
 	SUCCESS,
 	ARGUMENTS,
@@ -64,7 +64,7 @@ int			philo_error(int code);
 
 //		UTILS
 
-void		ph_putendl_fd(const char *str, int fd);
+void		ph_putendl_fd(const int fd, const char *str);
 size_t		ph_atoi(char *inp);
 
 #endif

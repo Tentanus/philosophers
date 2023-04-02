@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/19 13:43:13 by mweverli      #+#    #+#                 */
-/*   Updated: 2022/12/21 15:59:03 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/04/02 18:45:29 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int32_t	ph_strlen(const char *inp)
 	return (i);
 }
 
-void	ph_putendl_fd(const char *str, int fd)
+void	ph_putendl_fd(const int fd, const char *str)
 {
 	if (!str)
 		return(ph_putendl_fd("(null)", fd));
