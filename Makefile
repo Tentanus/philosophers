@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/04/02 18:43:24 by mweverli      ########   odam.nl          #
+#    Updated: 2023/05/17 18:01:47 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,13 @@ SRC_DIR		:=	src
 INC_DIR		:=	include
 LIB_DIR		:=	lib
 
-SRC			:=	philosophers/main.c
+SRC			:=	philo.c
 
-SRC			:=	$(SRC:%=$(SRC_DIR)/%)
+SRC			:=	$(SRC:%.c=$(SRC_DIR)/philosophers/%)
 OBJ			:=	$(notdir $(SRC:.c=.o))
 OBJ			:=	$(OBJ:%=$(OBJ_DIR)/%)
 DEP			:=	$(OBJ:.o=.d)
+
 -include $(DEP)
 
 #============== LIBRARIES ===============#
