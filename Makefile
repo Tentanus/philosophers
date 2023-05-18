@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/05/17 18:01:47 by mweverli      ########   odam.nl          #
+#    Updated: 2023/05/18 15:26:27 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,25 +14,24 @@
 #=========  GENERAL VARIABLES:  =========#
 #========================================#
 
-NAME		:=	philosophers
+NAME		:=	philo
 
 OBJ_DIR		:=	OBJ
 SRC_DIR		:=	src
 INC_DIR		:=	include
 LIB_DIR		:=	lib
 
-SRC			:=	philo.c
+SRC			:=	philo.c \
+				philo_error.c \
+				philo_init.c \
+				philo_utils.c
 
-SRC			:=	$(SRC:%.c=$(SRC_DIR)/philosophers/%)
-OBJ			:=	$(notdir $(SRC:.c=.o))
-OBJ			:=	$(OBJ:%=$(OBJ_DIR)/%)
+SRC			:=	$(SRC:%.c=$(SRC_DIR)/philo/%.c)
+OBJ			:=	$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 DEP			:=	$(OBJ:.o=.d)
+DIR_LIST	:=	$(sort $(dir $(OBJ)))
 
 -include $(DEP)
-
-#============== LIBRARIES ===============#
-
-LIB_LIST	:=
 
 #============= COMPILATION ==============#
 
@@ -43,7 +42,11 @@ CC			:=	gcc
 CFL			:=	-Wall -Werror -Wextra
 
 ifdef DEBUG
-CFL			+=	-g -fsanitize=address
+CFL			+=	-g
+endif
+
+ifdef FSAN
+CFL			+=	-fsanitize=thread
 endif
 
 COMPILE		:=	$(CC) $(CFL)
@@ -52,27 +55,30 @@ COMPILE		:=	$(CC) $(CFL)
 #============== RECIPIES  ===============#
 #========================================#
 
-echo:
+var:
 	@echo $(SRC) 
+	@echo "" 
+	@echo $(OBJ) 
+	@echo "" 
 
-all: $(NAME)
+all: $(DIR_LIST) $(NAME)
 
-$(OBJ_DIR):
+$(DIR_LIST):
 	@mkdir -p $@
 
-$(NAME): $(LIB_LIST) $(OBJ)
+$(NAME): $(OBJ)
 	@$(COMPILE) $(INCLUDE) $(LIBRARY) $(OBJ) -o $(NAME) $(LIB_LIST)
 	@echo "$(CYAN)$(BOLD)COMPILING COMPLETE$(RESET)"
 
-$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 	@$(COMPILE) $(INCLUDE) -MMD -o $@ -c $< 
-	@echo "$(CYAN)COMPILING: $(notdir $<)$(if $(findstring -g,$(CFL)), -g) \
+	@echo "$(CYAN)COMPILING: $(if $(findstring -g,$(CFL)), -g) $(notdir $<) \
 		$(RESET)"
 
 debug:
 	@$(MAKE) DEBUG=1 all
 
-rebug: fclean debug
+rebug: debug
 
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -87,8 +93,6 @@ re: fclean all
 #============== LIBRARIES ===============#
 #========================================#
 
-#$(LIB_LIB_ARC):
-#	@make -C $(LIB_LIBFT)
 
 #========================================#
 #============ MISCELLANEOUS =============#

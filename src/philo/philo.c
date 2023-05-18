@@ -6,30 +6,24 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/04/02 19:46:58 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/18 16:09:55 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-int philo(t_philo info)
-{
-	info.n_meal = 3;
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
-	t_philo	info;
-	int		status;
+	t_public	info;
 
 	if (argc < 5 || argc > 6)
 		return (philo_error(ARGUMENTS));
-	else if (philo_init(argv + 1, &info))
-		return (philo_error(INPUT));
-	status = philo(info);
-	return (philo_error(status));
+	philo_init(argv + 1, &info);
+	return (SUCCESS);
 }
 
 //	Make my own sleep function. [usleep] doesn't work precisely enough and can cause dataraces
+//
+//	make overviewing thread
+//	make sure mutex_locks are removed after a philo dies
 //	Use a mutex lock on my write function so write function won't be used twice 
