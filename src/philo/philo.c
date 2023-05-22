@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/22 22:04:19 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/22 22:06:53 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	philo_single(t_public info)
 	printf("%d\t%d\t%s\n", 0, 1, FORK);
 	usleep(info.t_die * 1000);
 	printf("%d\t%d\t%s\n", info.t_die, 1, DEAD);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
 
 int	main(int argc, char **argv)

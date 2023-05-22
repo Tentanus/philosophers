@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/22 21:49:47 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/22 22:07:32 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 //	DEFINES
 
 # define ERROR -1
+
 # define FORK "has taken a fork"
 # define EATING "is eating"
 # define SLEEPING "is sleeping"
