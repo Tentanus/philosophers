@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:36:12 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/22 21:37:47 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/22 22:02:32 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int32_t	philo_init(char **argv, t_public *info)
 		return (1);
 	if (!argv[4])
 		info->n_meal = -1;
-	return (1);
+	return (0);
 }
 
 //	make een eigen sleep functie.

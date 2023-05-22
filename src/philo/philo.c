@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/22 21:53:19 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/22 22:04:19 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ void	print_philo(t_public	info)
 	printf("\n\t-=-\tEND PRINT\t-=-\n");
 }
 
-int	philo_single(int code)
+int	philo_single(t_public info)
 {
-
+	printf("%d\t%d\t%s\n", 0, 1, FORK);
+	usleep(info.t_die * 1000);
+	printf("%d\t%d\t%s\n", info.t_die, 1, DEAD);
+	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)
@@ -39,9 +42,9 @@ int	main(int argc, char **argv)
 		return (philo_error(ERR_ARG));
 	if (philo_init(argv + 1, &info))
 		return (philo_error(ERR_INP));
-	if (info.n_philo == 1)
-		return (philo_single(EXIT_SUCCESS));
 	print_philo(info);
+	if (info.n_philo == 1)
+		return (philo_single(info));
 
 	return (SUCCESS);
 }
