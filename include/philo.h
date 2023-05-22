@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/18 19:34:48 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/22 21:49:47 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include <stdlib.h>		// write,
 # include <sys/time.h>		// gettimeofday, 
 # include <pthread.h>
-//int	pthread_detach
-//int	pthread_join
-//int	pthread_mutex_destroy
-//int	pthread_mutex_init
-//int	pthread_mutex_lock
-//int	pthread_mutex_unlock
+							//int	pthread_detach
+							//int	pthread_join
+							//int	pthread_mutex_destroy
+							//int	pthread_mutex_init
+							//int	pthread_mutex_lock
+							//int	pthread_mutex_unlock
 # include <stdlib.h>
 # include <limits.h>
 
@@ -34,20 +34,26 @@
 //	DEFINES
 
 # define ERROR -1
+# define FORK "has taken a fork"
+# define EATING "is eating"
+# define SLEEPING "is sleeping"
+# define THINKING "is thinking"
+# define DEAD "died"
 
 //	STRUCTURES AND ENUMS
 typedef struct s_public {
-	int32_t	n_philo;
-	int32_t	n_meal;
-	int32_t	t_die;
-	int32_t	t_eat;
-	int32_t	t_sleep;
+	int32_t			n_philo;
+	int32_t			n_meal;
+	int32_t			t_die;
+	int32_t			t_eat;
+	int32_t			t_sleep;
+	unsigned long	t_start;
 }	t_public;
 
 typedef enum e_message {
 	SUCCESS,
-	ARGUMENTS,
-	INPUT
+	ERR_ARG,
+	ERR_INP
 }	t_message;
 
 //	FUNCTIONS
@@ -59,6 +65,6 @@ int32_t			philo_error(int32_t code);
 
 void		ph_putstr_fd(const int fd, const char *str);
 void		ph_putendl_fd(const int fd, const char *str);
-size_t		ph_atoi(char *inp);
+int32_t		ph_atoi(char *inp);
 
 #endif

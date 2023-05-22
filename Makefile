@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/05/18 15:26:27 by mweverli      ########   odam.nl          #
+#    Updated: 2023/05/22 20:38:00 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,13 +67,13 @@ $(DIR_LIST):
 	@mkdir -p $@
 
 $(NAME): $(OBJ)
-	@$(COMPILE) $(INCLUDE) $(LIBRARY) $(OBJ) -o $(NAME) $(LIB_LIST)
-	@echo "$(CYAN)$(BOLD)COMPILING COMPLETE$(RESET)"
+	@echo ""
+	@$(COMPILE) $(INCLUDE) $(LIBRARY) $(OBJ) -o $(NAME)
+	@echo "$(RED)$(COMPILE)$(RESET) $(CYAN)$(INCLUDE)$(RESET) $(LIBRARY) $(GREEN)$(OBJ)$(RESET) -o $(NAME)"
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 	@$(COMPILE) $(INCLUDE) -MMD -o $@ -c $< 
-	@echo "$(CYAN)COMPILING: $(if $(findstring -g,$(CFL)), -g) $(notdir $<) \
-		$(RESET)"
+	@echo "$(CYAN)COMPILE	$(CFL)	$(notdir $<)$(RESET)"
 
 debug:
 	@$(MAKE) DEBUG=1 all

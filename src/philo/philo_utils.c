@@ -6,11 +6,11 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/19 13:43:13 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/18 15:29:29 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/22 20:19:46 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philosophers.h>
+#include <philo.h>
 
 int32_t	ph_strlen(const char *inp)
 {
@@ -27,7 +27,7 @@ int32_t	ph_strlen(const char *inp)
 void	ph_putstr_fd(const int fd, const char *str)
 {
 	if (!str)
-		return (ph_putstr_fd("(null)", fd));
+		return (ph_putstr_fd(fd, "(null)"));
 	write(fd, str, ph_strlen(str));
 
 }
@@ -42,7 +42,8 @@ int32_t	ph_atoi(char *inp)
 	int		i;
 	long	res;
 
-	if (inp[0] == '-' || ph_strlen(inp) > 10)
+	if (inp == NULL || inp[0] == '-' || \
+			ph_strlen(inp) > 10)
 		return (-1);
 	i = 0;
 	res = 0;
