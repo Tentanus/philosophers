@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/23 14:10:54 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/23 17:01:20 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	print_philo(t_public	info)
 	printf("meals:\t\t%d\n", info.n_meal);
 	printf("\n");
 	printf("time to:\t[ms]\n");
-	printf("eat:\t\t%d\n",info.t_eat);
-	printf("sleep:\t\t%d\n",info.t_sleep);
-	printf("die:\t\t%d\n",info.t_die);
+	printf("eat:\t\t%d\n", info.t_eat);
+	printf("sleep:\t\t%d\n", info.t_sleep);
+	printf("die:\t\t%d\n", info.t_die);
 	printf("\n\t-=-\tEND PRINT\t-=-\n");
 }
 
@@ -37,15 +37,18 @@ int	philo_single(t_public info)
 int	main(int argc, char **argv)
 {
 	t_public	info;
+	pthread_t	*philos;
 
+	philos = NULL;
 	if (argc < 5 || argc > 6)
 		return (philo_error(ERR_ARG));
 	if (philo_init(argv + 1, &info))
 		return (philo_error(ERR_INP));
-	print_philo(info);
+	print_philo(info); // this line needs removal when finished
 	if (info.n_philo == 1)
 		return (philo_single(info));
-
+	if (philo_alloc(&info, &philos) == 1)
+		return (philo_error(ERR_MEM));
 	return (SUCCESS);
 }
 

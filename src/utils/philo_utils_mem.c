@@ -6,13 +6,13 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 13:54:53 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/23 14:13:17 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/23 16:47:54 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	*ft_memset(void *ptr, int c, size_t len)
+void	*ph_memset(void *ptr, int c, size_t len)
 {
 	unsigned char	*b;
 
@@ -32,6 +32,6 @@ void	*ph_calloc(size_t byte, size_t size)
 	ptr = malloc(byte * size);
 	if (!ptr)
 		return (NULL);
-	ft_memset(ptr, 0, byte * size);
+	ph_memset(ptr, 0, byte * size);
 	return (ptr);
 }
