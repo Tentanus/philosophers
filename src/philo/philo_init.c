@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:36:12 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/22 22:02:32 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/23 13:51:21 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ int32_t	philo_init(char **argv, t_public *info)
 		info->n_meal = ph_atoi(argv[4]);
 	else
 		info->n_meal = 0;
-	if (info->n_philo < 1 || \
+	if (info->n_philo < 2 || \
 		info->t_die < 0 || \
 		info->t_eat < 0 || \
 		info->t_sleep < 0 || \
-		info->n_meal < 0)
+		info->n_meal < 1)
 		return (1);
 	if (!argv[4])
 		info->n_meal = -1;
-	return (0);
+	return (1);
 }
-
-//	make een eigen sleep functie.
-//	mutex lock on write function. 

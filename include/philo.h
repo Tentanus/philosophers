@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/22 22:07:32 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/23 14:14:47 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,14 @@ int32_t			philo_error(int32_t code);
 
 //		UTILS
 
+//		utils: string 
+int32_t		ph_strlen(const char *inp);
 void		ph_putstr_fd(const int fd, const char *str);
 void		ph_putendl_fd(const int fd, const char *str);
+
+//		utils: convert
 int32_t		ph_atoi(char *inp);
+
+//		utils: convert
 
 #endif

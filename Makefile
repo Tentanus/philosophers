@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/05/22 20:38:00 by mweverli      ########   odam.nl          #
+#    Updated: 2023/05/23 14:19:25 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,16 @@ SRC_DIR		:=	src
 INC_DIR		:=	include
 LIB_DIR		:=	lib
 
-SRC			:=	philo.c \
-				philo_error.c \
-				philo_init.c \
-				philo_utils.c
+SRC			:=	philo/philo.c \
+				philo/philo_init.c \
+				\
+				utils/philo_utils_convert.c \
+				utils/philo_utils_error.c \
+				utils/philo_utils_mem.c \
+				utils/philo_utils_str.c
 
-SRC			:=	$(SRC:%.c=$(SRC_DIR)/philo/%.c)
-OBJ			:=	$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+OBJ			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
+SRC			:=	$(SRC:%=$(SRC_DIR)/%)
 DEP			:=	$(OBJ:.o=.d)
 DIR_LIST	:=	$(sort $(dir $(OBJ)))
 
@@ -51,6 +54,9 @@ endif
 
 COMPILE		:=	$(CC) $(CFL)
 
+INFO_FL		:=	$(if $(findstring -g,$(CFL)), -g) \
+				$(if $(findstring thread,$(CFL)), -fsan=thread)
+
 #========================================#
 #============== RECIPIES  ===============#
 #========================================#
@@ -59,6 +65,8 @@ var:
 	@echo $(SRC) 
 	@echo "" 
 	@echo $(OBJ) 
+	@echo "" 
+	@echo $(DIR_LIST) 
 	@echo "" 
 
 all: $(DIR_LIST) $(NAME)
@@ -69,11 +77,11 @@ $(DIR_LIST):
 $(NAME): $(OBJ)
 	@echo ""
 	@$(COMPILE) $(INCLUDE) $(LIBRARY) $(OBJ) -o $(NAME)
-	@echo "$(RED)$(COMPILE)$(RESET) $(CYAN)$(INCLUDE)$(RESET) $(LIBRARY) $(GREEN)$(OBJ)$(RESET) -o $(NAME)"
+	@echo "$(COMPILE) $(INCLUDE) $(LIBRARY) $(CYAN)$(notdir $(OBJ))$(RESET) -o $(NAME)"
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 	@$(COMPILE) $(INCLUDE) -MMD -o $@ -c $< 
-	@echo "$(CYAN)COMPILE	$(CFL)	$(notdir $<)$(RESET)"
+	@echo "$(CYAN)COMPILE $(INFO_FL) $(notdir $<)$(RESET)"
 
 debug:
 	@$(MAKE) DEBUG=1 all
