@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:36:12 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/25 18:33:57 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/25 18:52:24 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	philo_alloc_fill(t_philo *philos, pthread_mutex_t *forks, size_t nbr)
 	philos->time_last_meal = 0;
 	philos->fork_r = &forks[nbr];
 	philos->fork_l = &forks[nbr + 1];
+	if ((int32_t) nbr == philos->public_data->nbr_philo)
+		philos->fork_l = &forks[0];
 	return (SUCCESS);
 }
 
@@ -35,13 +37,14 @@ int32_t	philo_alloc(t_public *info, t_philo **philos)
 	if (!philos)
 		return (ERR_MEM);
 	forks = ph_calloc(sizeof(pthread_mutex_t), info->nbr_philo);
-
+	if (!forks)
+		return (free(*philos), ERR_MEM);
 	i = 0;
 	while (i < limit)
 	{
 		philos[i]->public_data = info;
 		if (philo_alloc_fill(&philos[0][i], forks, i) != SUCCESS)
-			return (philo_free(*philos, forks, i), ERR_MEM);
+			return (philo_alloc_free(*philos, forks, i), ERR_MEM);
 		i++;
 	}
 	return (SUCCESS);

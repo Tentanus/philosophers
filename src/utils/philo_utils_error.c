@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:50:21 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/23 15:58:48 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/25 18:44:55 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ const char	*philo_error_message(int code)
 {
 	const char	*message[] = {
 	[ERR_ARG] = "INCORRECT ARGUMENTS: 4 or 5",
-	[ERR_INP] = "INCORRECT INPUT: 1 till INT_MAX"
+	[ERR_INP] = "INCORRECT INPUT: 1 till INT_MAX",
+	[ERR_MEM] = "ALLOCATION ERROR"
 	};
 
 	return (message[code]);

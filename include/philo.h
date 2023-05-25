@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/25 18:34:19 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/25 18:53:50 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,25 +76,25 @@ typedef enum e_message {
 
 //	FUNCTIONS
 
-int32_t			philo_error(int32_t code);
+int32_t	philo_init(char **argv, t_public *info);
+int32_t	philo_alloc(t_public *info, t_philo **philos);
 
-int32_t			philo_init(char **argv, t_public *info);
-int32_t			philo_alloc(t_public *info, t_philo **philos);
-
-void		philo_free(t_philo *philos, pthread_mutex_t *forks, size_t size);
+void	philo_alloc_free(t_philo *philos, pthread_mutex_t *forks, size_t limit);
 
 //		UTILS
-
-//		utils: string 
-int32_t		ph_strlen(const char *inp);
-void		ph_putstr_fd(const int fd, const char *str);
-void		ph_putendl_fd(const int fd, const char *str);
-
 //		utils: convert
-int32_t		ph_atoi(char *inp);
+int32_t	ph_atoi(char *inp);
+
+//		utils: error 
+int32_t	philo_error(int32_t code);
 
 //		utils: memory
-void		*ph_calloc(size_t byte, size_t size);
+void	*ph_calloc(size_t byte, size_t size);
+
+//		utils: string 
+int32_t	ph_strlen(const char *inp);
+void	ph_putstr_fd(const int fd, const char *str);
+void	ph_putendl_fd(const int fd, const char *str);
 
 
 #endif
