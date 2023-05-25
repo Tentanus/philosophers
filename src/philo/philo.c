@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/23 17:01:20 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/25 17:03:49 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	philo_single(t_public info)
 int	main(int argc, char **argv)
 {
 	t_public	info;
-	pthread_t	*philos;
+	t_philo		**philos;
 
 	philos = NULL;
 	if (argc < 5 || argc > 6)
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 	print_philo(info); // this line needs removal when finished
 	if (info.n_philo == 1)
 		return (philo_single(info));
-	if (philo_alloc(&info, &philos) == 1)
+	if (philo_alloc(&info, philos) != SUCCESS)
 		return (philo_error(ERR_MEM));
 	return (SUCCESS);
 }

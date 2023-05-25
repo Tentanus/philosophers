@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/05/23 14:19:25 by mweverli      ########   odam.nl          #
+#    Updated: 2023/05/25 10:54:35 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,13 +49,16 @@ CFL			+=	-g
 endif
 
 ifdef FSAN
-CFL			+=	-fsanitize=thread
+CFL			+=	-fsanitize=address -fsanitize=undefined
 endif
 
 COMPILE		:=	$(CC) $(CFL)
 
-INFO_FL		:=	$(if $(findstring -g,$(CFL)), -g) \
-				$(if $(findstring thread,$(CFL)), -fsan=thread)
+INFO_FL		:=\
+$(if $(findstring -g,$(CFL)),-g)\
+$(if $(findstring thread,$(CFL)),-fsan=thread)\
+$(if $(findstring address,$(CFL)),-fsan=address)\
+$(if $(findstring undefined,$(CFL)),-fsan=undef)
 
 #========================================#
 #============== RECIPIES  ===============#

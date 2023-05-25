@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/23 16:58:59 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/25 17:12:26 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,18 @@ typedef struct s_public {
 	int32_t				n_full_philo;
 	bool				death;
 	unsigned long		t_start;
-	pthread_mutex_t		*fork;
 }	t_public;
 
+// expand t_* to time same for n_*
+
 typedef struct s_philo {
+	pthread_t			*thread;
 	int32_t				id;
 	int32_t				n_meal_eaten;
 	pthread_mutex_t		fork_l;
 	pthread_mutex_t		fork_r;
 	unsigned long		t_last_eaten;
+	const t_public		*public_data;
 }	t_philo;
 
 typedef enum e_message {
@@ -76,7 +79,7 @@ typedef enum e_message {
 int32_t			philo_error(int32_t code);
 
 int32_t			philo_init(char **argv, t_public *info);
-int32_t			philo_alloc(t_public *info, pthread_t **philo);
+int32_t			philo_alloc(t_public *info, t_philo **philos);
 
 //		UTILS
 
