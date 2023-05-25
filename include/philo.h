@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/25 17:12:26 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/25 18:34:19 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,25 @@
 
 //	STRUCTURES AND ENUMS
 typedef struct s_public {
-	int32_t				n_philo;
-	int32_t				n_meal;
-	int32_t				t_die;
-	int32_t				t_eat;
-	int32_t				t_sleep;
-	int32_t				n_full_philo;
+	int32_t				nbr_philo;
+	int32_t				nbr_full_philo;
+	int32_t				nbr_meal;
+	int32_t				time_die;
+	int32_t				time_eat;
+	int32_t				time_sleep;
+	unsigned long		time_start;
 	bool				death;
-	unsigned long		t_start;
 }	t_public;
 
 // expand t_* to time same for n_*
 
 typedef struct s_philo {
 	pthread_t			*thread;
-	int32_t				id;
-	int32_t				n_meal_eaten;
-	pthread_mutex_t		fork_l;
-	pthread_mutex_t		fork_r;
-	unsigned long		t_last_eaten;
+	int32_t				philo_id;
+	int32_t				nbr_meal_eaten;
+	unsigned long		time_last_meal;
+	pthread_mutex_t		*fork_r;
+	pthread_mutex_t		*fork_l;
 	const t_public		*public_data;
 }	t_philo;
 
@@ -80,6 +80,8 @@ int32_t			philo_error(int32_t code);
 
 int32_t			philo_init(char **argv, t_public *info);
 int32_t			philo_alloc(t_public *info, t_philo **philos);
+
+void		philo_free(t_philo *philos, pthread_mutex_t *forks, size_t size);
 
 //		UTILS
 
