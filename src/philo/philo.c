@@ -54,6 +54,7 @@ int	main(int argc, char **argv)
 {
 	t_public	info;
 	t_philo		*philos;
+	t_queue		queue;
 
 	philos = NULL;
 	if (argc < 5 || argc > 6)
@@ -62,7 +63,7 @@ int	main(int argc, char **argv)
 		return (philo_error(ERR_INP));
 	if (info.nbr_philo == 1)
 		return (philo_single(info));
-	if (philo_alloc(&info, &philos) != SUCCESS)
+	if (philo_alloc(&info, &philos, &queue) != SUCCESS)
 		return (philo_error(ERR_MEM));
 	philo_print(philos, info); // this line needs removal when finished
 	return (SUCCESS);
