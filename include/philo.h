@@ -50,10 +50,18 @@ typedef struct s_public {
 	int32_t				time_die;
 	int32_t				time_eat;
 	int32_t				time_sleep;
-	unsigned long		time_start;
+	int64_t				time_start;
 	pthread_mutex_t		start;
 	bool				death;
 }	t_public;
+
+typedef struct	s_queue{
+	int32_t				*time[2];
+	int32_t				*philo[2];
+	int32_t				*action[2];
+	int32_t				count;
+	pthread_mutex_t		msg_mutex;
+}	t_queue;
 
 typedef struct s_philo {
 	pthread_t			*thread;
@@ -63,6 +71,7 @@ typedef struct s_philo {
 	pthread_mutex_t		*fork_r;
 	pthread_mutex_t		*fork_l;
 	const t_public		*public_data;
+	t_queue				queue;
 }	t_philo;
 
 typedef enum e_message {
@@ -88,6 +97,7 @@ int32_t	ph_atoi(char *inp);
 int32_t	philo_error(int32_t code);
 
 //		utils: memory
+void	*ph_memset(void *ptr, int c, size_t len);
 void	*ph_calloc(size_t byte, size_t size);
 
 //		utils: string 
