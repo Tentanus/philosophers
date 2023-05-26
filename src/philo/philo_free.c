@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   philo_utils_convert.c                              :+:    :+:            */
+/*   philo_free.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/12/19 13:43:13 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/26 21:22:56 by mweverli      ########   odam.nl         */
+/*   Created: 2023/05/25 18:13:27 by mweverli      #+#    #+#                 */
+/*   Updated: 2023/05/26 21:22:24 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-int32_t	ph_atoi(char *inp)
+void	philo_alloc_free(t_philo *philos, pthread_mutex_t *forks, size_t limit)
 {
-	int		i;
-	long	res;
+	size_t	i;
 
-	if (inp == NULL || inp[0] == '-' || \
-			ph_strlen(inp) > 10)
-		return (-1);
 	i = 0;
-	res = 0;
-	if (inp[0] == '+')
-		inp++;
-	while (inp[i] >= '0' && inp[i] <= '9')
+	free(forks);
+	while(i < limit)
 	{
-		res = res * 10 + (inp[i] - '0');
+		free(philos[i].thread);
 		i++;
 	}
-	if (inp[i] != '\0' || res > INT_MAX || res < -1)
-		return (-1);
-	return (res);
+	free(philos);
 }

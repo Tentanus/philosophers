@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   philo_utils_convert.c                              :+:    :+:            */
+/*   philo_utils_time.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/12/19 13:43:13 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/26 21:22:56 by mweverli      ########   odam.nl         */
+/*   Created: 2023/05/26 19:10:11 by mweverli      #+#    #+#                 */
+/*   Updated: 2023/05/26 21:23:43 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-int32_t	ph_atoi(char *inp)
-{
-	int		i;
-	long	res;
+int64_t	time_in_ms(void) {
+	struct timeval	tv;
 
-	if (inp == NULL || inp[0] == '-' || \
-			ph_strlen(inp) > 10)
-		return (-1);
-	i = 0;
-	res = 0;
-	if (inp[0] == '+')
-		inp++;
-	while (inp[i] >= '0' && inp[i] <= '9')
-	{
-		res = res * 10 + (inp[i] - '0');
-		i++;
-	}
-	if (inp[i] != '\0' || res > INT_MAX || res < -1)
-		return (-1);
-	return (res);
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
+
+int64_t	time_diff_ms(int64_t start, int64_t end) {
+	return (end - start);
+}
+
+void	time_sleep_ms(int64_t sleep_ms) {
+	const int64_t	start = tod_ms();
+
+	while (1)
+	{
+		if (time_diff_ms(start, tod_ms()) >= sleep_ms)
+			return ;
+		usleep(500);
+	}
+}
+

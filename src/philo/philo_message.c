@@ -1,35 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   philo_utils_convert.c                              :+:    :+:            */
+/*   philo_message.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/12/19 13:43:13 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/26 21:22:56 by mweverli      ########   odam.nl         */
+/*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
+/*   Updated: 2023/05/26 21:21:10 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+void	philo_queue_message()
 
-int32_t	ph_atoi(char *inp)
-{
-	int		i;
-	long	res;
-
-	if (inp == NULL || inp[0] == '-' || \
-			ph_strlen(inp) > 10)
-		return (-1);
-	i = 0;
-	res = 0;
-	if (inp[0] == '+')
-		inp++;
-	while (inp[i] >= '0' && inp[i] <= '9')
-	{
-		res = res * 10 + (inp[i] - '0');
-		i++;
-	}
-	if (inp[i] != '\0' || res > INT_MAX || res < -1)
-		return (-1);
-	return (res);
-}
