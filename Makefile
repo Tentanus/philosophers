@@ -22,11 +22,11 @@ INC_DIR		:=	include
 LIB_DIR		:=	lib
 
 SRC			:=	philo/philo.c \
+				philo/philo_error.c \
+				philo/philo_free.c \
 				philo/philo_init.c \
 				\
 				utils/philo_utils_convert.c \
-				utils/philo_utils_error.c \
-				utils/philo_utils_free.c \
 				utils/philo_utils_mem.c \
 				utils/philo_utils_str.c
 
