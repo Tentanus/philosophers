@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 13:54:53 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/23 16:47:54 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/26 17:52:21 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ph_memset(void *ptr, int c, size_t len)
 	unsigned char	*b;
 
 	b = ptr;
-	while (len >= 0)
+	while (len > 0)
 	{
 		b[len] = c;
 		len--;

@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/25 18:53:50 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/26 21:09:40 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ typedef struct s_public {
 	int32_t				time_eat;
 	int32_t				time_sleep;
 	unsigned long		time_start;
+	pthread_mutex_t		start;
 	bool				death;
 }	t_public;
-
-// expand t_* to time same for n_*
 
 typedef struct s_philo {
 	pthread_t			*thread;

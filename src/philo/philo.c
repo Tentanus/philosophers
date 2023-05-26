@@ -6,23 +6,39 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/25 18:20:11 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/26 21:10:49 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	print_philo(t_public	info)
+void	philo_print(t_philo *philos,t_public info)
 {
-	printf("\t-=-\tPHILO PRINT\t-=-\n");
-	printf("\n");
-	printf("philos:\t\t%d\n", info.nbr_philo);
-	printf("meals:\t\t%d\n", info.nbr_meal);
-	printf("\n");
-	printf("time to:\t[ms]\n");
-	printf("eat:\t\t%d\n", info.time_eat);
-	printf("sleep:\t\t%d\n", info.time_sleep);
-	printf("die:\t\t%d\n", info.time_die);
+	int32_t	i;
+	printf("\t-=-\tPHILO PRINT\t-=-\n\n");
+
+
+	printf("|   INFO:\n");
+	printf("|number of philos:\t%d\n", info.nbr_philo);
+	printf("|full philos:\t\t%d\n", info.nbr_full_philo);
+	printf("|number of meals:\t%d\n", info.nbr_meal);
+	printf("|time to die:\t\t%d\n", info.time_die);
+	printf("|time to eat:\t\t%d\n", info.time_eat);
+	printf("|time to sleep:\t\t%d\n", info.time_sleep);
+	printf("|__________________________\n\n");
+	i = 0;
+	while (i < info.nbr_philo)
+	{
+		printf("|\tPHILO [%d]\n", philos[i].philo_id);
+		printf("|meals had:\t%d\n", philos[i].nbr_meal_eaten);
+		printf("|time last:\t%lu\n", philos[i].time_last_meal);
+		printf("|fork R:\t%p\n", philos[i].fork_r);
+		printf("|fork L:\t%p\n", philos[i].fork_l);
+		printf("|info address:\t%p\n", philos[i].public_data);
+		printf("|__________________________\n\n");
+		i++;
+	}
+
 	printf("\n\t-=-\tEND PRINT\t-=-\n");
 }
 
@@ -37,18 +53,18 @@ int	philo_single(t_public info)
 int	main(int argc, char **argv)
 {
 	t_public	info;
-	t_philo		**philos;
+	t_philo		*philos;
 
 	philos = NULL;
 	if (argc < 5 || argc > 6)
 		return (philo_error(ERR_ARG));
 	if (philo_init(argv + 1, &info))
 		return (philo_error(ERR_INP));
-	print_philo(info); // this line needs removal when finished
 	if (info.nbr_philo == 1)
 		return (philo_single(info));
-	if (philo_alloc(&info, philos) != SUCCESS)
+	if (philo_alloc(&info, &philos) != SUCCESS)
 		return (philo_error(ERR_MEM));
+	philo_print(philos, info); // this line needs removal when finished
 	return (SUCCESS);
 }
 
