@@ -16,15 +16,24 @@ int32_t	philo_alloc_queue(t_queue *queue, int32_t nbr_philo)
 {
 	ph_memset(queue, 0, sizeof(t_queue));
 	queue->time[0] = ph_calloc(sizeof(int32_t), nbr_philo);
+	if (queue->time[0] == NULL)
+		return (ERR_MEM);
 	queue->time[1] = ph_calloc(sizeof(int32_t), nbr_philo);
+	if (queue->time[1] == NULL)
+		return (philo_free_queue(queue), ERR_MEM);
 	queue->philo[0] = ph_calloc(sizeof(int32_t), nbr_philo);
+	if (queue->philo[0] == NULL)
+		return (philo_free_queue(queue), ERR_MEM);
 	queue->philo[1] = ph_calloc(sizeof(int32_t), nbr_philo);
+	if (queue->philo[1] == NULL)
+		return (philo_free_queue(queue), ERR_MEM);
 	queue->action[0] = ph_calloc(sizeof(int32_t), nbr_philo);
+	if (queue->action[0] == NULL)
+		return (philo_free_queue(queue), ERR_MEM);
 	queue->action[1] = ph_calloc(sizeof(int32_t), nbr_philo);
-	if (queue->time[0] == NULL || queue->time[1] == NULL || \
-		queue->philo[0] == NULL || queue->philo[1] == NULL || \
-		queue->action[0] == NULL || queue->action[1] == NULL)
-		return (free_queue(queue), ERR_MEM);
+	if (queue->action[1] == NULL)
+		return (philo_free_queue(queue), ERR_MEM);
+	return (SUCCESS);
 }
 
 int32_t	philo_alloc_fill(t_philo *philos, pthread_mutex_t *forks, t_queue *queue, \
@@ -61,7 +70,7 @@ int32_t	philo_alloc(t_public *info, t_philo **philos, t_queue *queue)
 	{
 		philos[0][i].public_data = info;
 		if (philo_alloc_fill(&philos[0][i], forks, queue, i) != SUCCESS)
-			return (philo_alloc_free(*philos, forks, i), ERR_MEM);
+			return (philo_free_alloc(*philos, forks, i), ERR_MEM);
 		i++;
 	}
 	if (philo_alloc_queue(queue, info) != SUCCESS)

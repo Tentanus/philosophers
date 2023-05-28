@@ -12,7 +12,7 @@
 
 #include <philo.h>
 
-void	philo_alloc_free(t_philo *philos, pthread_mutex_t *forks, size_t limit)
+void	philo_free_alloc(t_philo *philos, pthread_mutex_t *forks, size_t limit)
 {
 	size_t	i;
 
@@ -24,4 +24,26 @@ void	philo_alloc_free(t_philo *philos, pthread_mutex_t *forks, size_t limit)
 		i++;
 	}
 	free(philos);
+}
+
+void	philo_free_queue(t_msg_queue *queue)
+{
+	if (queue->time[0] != NULL)
+		free(queue->time[0]);
+	if (queue->time[1] != NULL)
+		free(queue->time[1]);
+	if (queue->philo[0] != NULL)
+		free(queue->philo[0]);
+	if (queue->philo[1] != NULL)
+		free(queue->philo[1]);
+	if (queue->action[0] != NULL)
+		free(queue->action[0]);
+	if (queue->action[1] != NULL)
+		free(queue->action[1]);
+	queue->time[0] = NULL;
+	queue->time[1] = NULL;
+	queue->philo[0] = NULL;
+	queue->philo[1] = NULL;
+	queue->action[0] = NULL;
+	queue->action[1] = NULL;
 }

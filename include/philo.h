@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   philosophers.h                                     :+:    :+:            */
+/*   philo.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
@@ -42,6 +42,15 @@
 # define THINK "is thinking"
 # define DEAD "died"
 
+typedef enum e_msg {
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DIE,
+	END
+}	t_msg;
+
 //	STRUCTURES AND ENUMS
 typedef struct s_public {
 	int32_t				nbr_philo;
@@ -55,13 +64,13 @@ typedef struct s_public {
 	bool				death;
 }	t_public;
 
-typedef struct	s_queue{
+typedef struct	s_msg_queue{
 	int32_t				*time[2];
 	int32_t				*philo[2];
 	int32_t				*action[2];
 	int32_t				count;
 	pthread_mutex_t		msg_mutex;
-}	t_queue;
+}	t_msg_queue;
 
 typedef struct s_philo {
 	pthread_t			*thread;
@@ -70,7 +79,7 @@ typedef struct s_philo {
 	unsigned long		time_last_meal;
 	pthread_mutex_t		*fork_r;
 	pthread_mutex_t		*fork_l;
-	const t_public		*public_data;
+	t_public			*public_data;
 	t_queue				queue;
 }	t_philo;
 
