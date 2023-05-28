@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static const char	*g_msgs[] = {
+static const char	*g_msg[] = {
 	[FORK] = "has taken a fork",
 	[EAT] = "is eating",
 	[SLEEP] = "is sleeping",

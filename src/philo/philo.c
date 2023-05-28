@@ -44,9 +44,9 @@ void	philo_print(t_philo *philos,t_public info)
 
 int	philo_single(t_public info)
 {
-	printf("%d\t%d\t%s\n", 0, 1, FORK);
+	printf("%d %d has taken a fork\n", 0, 1);
 	usleep(info.time_die * 1000);
-	printf("%d\t%d\t%s\n", info.time_die, 1, DEAD);
+	printf("%d %d died\n", info.time_die, 1);
 	return (SUCCESS);
 }
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 {
 	t_public	info;
 	t_philo		*philos;
-	t_queue		queue;
+	t_msg_queue	queue;
 
 	philos = NULL;
 	if (argc < 5 || argc > 6)

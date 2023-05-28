@@ -12,20 +12,16 @@
 
 #include <philo.h>
 
-const char	*philo_error_message(int code)
-{
-	const char	*message[] = {
+static const char	*g_err_msg[] = {
+	[SUCCESS] = "-",
 	[ERR_ARG] = "INCORRECT ARGUMENTS: 4 or 5",
 	[ERR_INP] = "INCORRECT INPUT: 1 till INT_MAX",
 	[ERR_MEM] = "ALLOCATION ERROR"
-	};
-
-	return (message[code]);
-}
+};
 
 int	philo_error(int32_t code)
 {
 	ph_putstr_fd(STDERR_FILENO, "philo: ");
-	ph_putendl_fd(STDERR_FILENO, philo_error_message(code));
+	ph_putendl_fd(STDERR_FILENO, g_err_msg[code]);
 	return (code);
 }

@@ -12,9 +12,9 @@
 
 #include <philo.h>
 
-int32_t	philo_alloc_queue(t_queue *queue, int32_t nbr_philo)
+static int32_t	philo_alloc_queue(t_msg_queue *queue, int32_t nbr_philo)
 {
-	ph_memset(queue, 0, sizeof(t_queue));
+	ph_memset(queue, 0, sizeof(t_msg_queue));
 	queue->time[0] = ph_calloc(sizeof(int32_t), nbr_philo);
 	if (queue->time[0] == NULL)
 		return (ERR_MEM);
@@ -36,8 +36,8 @@ int32_t	philo_alloc_queue(t_queue *queue, int32_t nbr_philo)
 	return (SUCCESS);
 }
 
-int32_t	philo_alloc_fill(t_philo *philos, pthread_mutex_t *forks, t_queue *queue, \
-		size_t nbr)
+static int32_t	philo_alloc_fill(t_philo *philos, pthread_mutex_t *forks, \
+		t_msg_queue *queue, size_t nbr)
 {
 	philos->thread = ph_calloc(sizeof(pthread_t), 1);
 	if (!(philos->thread))
@@ -53,7 +53,7 @@ int32_t	philo_alloc_fill(t_philo *philos, pthread_mutex_t *forks, t_queue *queue
 	return (SUCCESS);
 }
 
-int32_t	philo_alloc(t_public *info, t_philo **philos, t_queue *queue)
+int32_t	philo_alloc(t_public *info, t_philo **philos, t_msg_queue *queue)
 {
 	size_t			i;
 	const size_t	limit = (size_t) info->nbr_philo;
@@ -73,8 +73,8 @@ int32_t	philo_alloc(t_public *info, t_philo **philos, t_queue *queue)
 			return (philo_free_alloc(*philos, forks, i), ERR_MEM);
 		i++;
 	}
-	if (philo_alloc_queue(queue, info) != SUCCESS)
-		return (philo_alloc_free(*philos, forks, i), ERR_MEM);
+	if (philo_alloc_queue(queue, info->nbr_philo) != SUCCESS)
+		return (philo_free_alloc(*philos, forks, i), ERR_MEM);
 	return (SUCCESS);
 }
 
