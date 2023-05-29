@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/05/25 18:55:39 by mweverli      ########   odam.nl          #
+#    Updated: 2023/05/29 16:17:49 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC			:=	philo/philo.c \
 				philo/philo_error.c \
 				philo/philo_free.c \
 				philo/philo_init.c \
+				philo/philo_run.c \
 				\
 				utils/philo_utils_convert.c \
 				utils/philo_utils_mem.c \

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   philosophers.c                                     :+:    :+:            */
+/*   philo.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/26 21:10:49 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 15:57:45 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	philo_print(t_philo *philos,t_public info)
+static void	philo_print(t_philo *philos, t_public info)
 {
 	int32_t	i;
+
 	printf("\t-=-\tPHILO PRINT\t-=-\n\n");
-
-
 	printf("|   INFO:\n");
 	printf("|number of philos:\t%d\n", info.nbr_philo);
 	printf("|full philos:\t\t%d\n", info.nbr_full_philo);
@@ -38,11 +37,10 @@ void	philo_print(t_philo *philos,t_public info)
 		printf("|__________________________\n\n");
 		i++;
 	}
-
 	printf("\n\t-=-\tEND PRINT\t-=-\n");
 }
 
-int	philo_single(t_public info)
+static int	philo_single(t_public info)
 {
 	printf("%d %d has taken a fork\n", 0, 1);
 	usleep(info.time_die * 1000);
@@ -65,6 +63,8 @@ int	main(int argc, char **argv)
 		return (philo_single(info));
 	if (philo_alloc(&info, &philos, &queue) != SUCCESS)
 		return (philo_error(ERR_MEM));
+	if (philo_run(&info, philos, &queue) != SUCCESS)
+		return (philo_error(ERR_THR));
 	philo_print(philos, info); // this line needs removal when finished
 	return (SUCCESS);
 }

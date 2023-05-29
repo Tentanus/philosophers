@@ -6,12 +6,12 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/26 21:09:40 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 16:19:43 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILO_H
+# define PHILO_H
 
 //	INCLUDE
 
@@ -49,11 +49,11 @@ typedef struct s_public {
 	bool				death;
 }	t_public;
 
-typedef struct	s_msg_queue{
-	int32_t			*time[2];
-	int32_t			*philo[2];
-	int32_t			*action[2];
-	int32_t				count;
+typedef struct s_msg_queue{
+	int32_t				*time[2];
+	int32_t				*philo[2];
+	int32_t				*action[2];
+	int32_t				count;	// mutexed
 	pthread_mutex_t		msg_mutex;
 }	t_msg_queue;
 
@@ -89,6 +89,11 @@ typedef enum e_message {
 
 int32_t	philo_init(char **argv, t_public *info);
 int32_t	philo_alloc(t_public *info, t_philo **philos, t_msg_queue *queue);
+int32_t	philo_run(t_public *info, t_philo *philos, t_msg_queue *queue);
+
+void	*philo_routine(void *ptr);
+
+int32_t	philo_error(int32_t code);
 
 void	philo_free_alloc(t_philo *philos, pthread_mutex_t *forks, size_t limit);
 void	philo_free_queue(t_msg_queue *queue);
@@ -96,9 +101,6 @@ void	philo_free_queue(t_msg_queue *queue);
 //		UTILS
 //		utils: convert
 int32_t	ph_atoi(char *inp);
-
-//		utils: error 
-int32_t	philo_error(int32_t code);
 
 //		utils: memory
 void	*ph_memset(void *ptr, int c, size_t len);
@@ -108,6 +110,5 @@ void	*ph_calloc(size_t byte, size_t size);
 int32_t	ph_strlen(const char *inp);
 void	ph_putstr_fd(const int fd, const char *str);
 void	ph_putendl_fd(const int fd, const char *str);
-
 
 #endif

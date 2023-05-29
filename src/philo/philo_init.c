@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:36:12 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/26 21:22:38 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 16:17:31 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,17 @@ static int32_t	philo_alloc_queue(t_msg_queue *queue, int32_t nbr_philo)
 {
 	ph_memset(queue, 0, sizeof(t_msg_queue));
 	queue->time[0] = ph_calloc(sizeof(int32_t), nbr_philo);
-	if (queue->time[0] == NULL)
-		return (ERR_MEM);
 	queue->time[1] = ph_calloc(sizeof(int32_t), nbr_philo);
-	if (queue->time[1] == NULL)
-		return (philo_free_queue(queue), ERR_MEM);
 	queue->philo[0] = ph_calloc(sizeof(int32_t), nbr_philo);
-	if (queue->philo[0] == NULL)
-		return (philo_free_queue(queue), ERR_MEM);
 	queue->philo[1] = ph_calloc(sizeof(int32_t), nbr_philo);
-	if (queue->philo[1] == NULL)
-		return (philo_free_queue(queue), ERR_MEM);
 	queue->action[0] = ph_calloc(sizeof(int32_t), nbr_philo);
-	if (queue->action[0] == NULL)
-		return (philo_free_queue(queue), ERR_MEM);
 	queue->action[1] = ph_calloc(sizeof(int32_t), nbr_philo);
-	if (queue->action[1] == NULL)
+	if (queue->time[0] == NULL || \
+		queue->time[1] == NULL || \
+		queue->philo[0] == NULL || \
+		queue->philo[1] == NULL || \
+		queue->action[0] == NULL || \
+		queue->action[1] == NULL)
 		return (philo_free_queue(queue), ERR_MEM);
 	return (SUCCESS);
 }
@@ -46,6 +41,7 @@ static int32_t	philo_alloc_fill(t_philo *philos, pthread_mutex_t *forks, \
 	philos->nbr_meal_eaten = 0;
 	philos->time_last_meal = 0;
 	philos->fork_r = &forks[nbr];
+	pthread_mutex_init(&forks[nbr], NULL);
 	philos->fork_l = &forks[nbr + 1];
 	if ((int32_t) nbr == (philos->public_data->nbr_philo - 1))
 		philos->fork_l = &forks[0];
@@ -96,6 +92,6 @@ int32_t	philo_init(char **argv, t_public *info)
 		return (ERR_INP);
 	info->nbr_full_philo = 0;
 	info->death = false;
+	pthread_mutex_init(&(info->start), NULL);
 	return (SUCCESS);
 }
-

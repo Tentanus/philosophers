@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/25 18:13:27 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/26 21:22:24 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 15:01:10 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	philo_free_alloc(t_philo *philos, pthread_mutex_t *forks, size_t limit)
 
 	i = 0;
 	free(forks);
-	while(i < limit)
+	while (i < limit)
 	{
 		free(philos[i].thread);
 		i++;
