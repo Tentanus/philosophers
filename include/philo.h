@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 16:19:43 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 17:01:40 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_public {
 	int32_t				time_sleep;
 	int64_t				time_start;
 	pthread_mutex_t		start;
-	bool				death;
+	bool				err;
 }	t_public;
 
 typedef struct s_msg_queue{

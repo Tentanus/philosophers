@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/25 18:13:27 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 15:01:10 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 17:06:21 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,13 @@ void	philo_free_queue(t_msg_queue *queue)
 	queue->philo[1] = NULL;
 	queue->action[0] = NULL;
 	queue->action[1] = NULL;
+}
+
+void	philo_thread_join(t_philo *philos, size_t max_philos)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < max_philos)
+		pthread_join(philos[i].thread, NULL);
 }

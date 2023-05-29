@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 16:26:13 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 17:21:03 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ void	philo_print_queue(t_msg_queue *queue)
 				return ;
 			i++;
 		}
-		time_sleep_ms(250);
+		time_sleep_ms(250);// this sleep may need som adjusting/fidling
+		ph_memset(queue->time[0], 0, sizeof(int32_t) * max_count);
+		ph_memset(queue->philo[0], 0, sizeof(int32_t) * max_count);
+		ph_memset(queue->action[0], 0, sizeof(int32_t) * max_count);
 	}
 }
 

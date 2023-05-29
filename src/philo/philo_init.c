@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:36:12 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 16:17:31 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 17:01:54 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int32_t	philo_init(char **argv, t_public *info)
 		info->time_sleep < 1 || (argv[4] && info->nbr_meal < 1))
 		return (ERR_INP);
 	info->nbr_full_philo = 0;
-	info->death = false;
+	info->err = false;
 	pthread_mutex_init(&(info->start), NULL);
 	return (SUCCESS);
 }
