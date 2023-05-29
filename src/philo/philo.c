@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 15:57:45 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 19:22:50 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	philo_print(t_philo *philos, t_public info)
 	{
 		printf("|\tPHILO [%d]\n", philos[i].philo_id);
 		printf("|meals had:\t%d\n", philos[i].nbr_meal_eaten);
-		printf("|time last:\t%lu\n", philos[i].time_last_meal);
+		printf("|time last:\t%llu\n", philos[i].time_last_meal);
 		printf("|fork R:\t%p\n", philos[i].fork_r);
 		printf("|fork L:\t%p\n", philos[i].fork_l);
 		printf("|info address:\t%p\n", philos[i].public_data);

@@ -6,9 +6,11 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 17:21:03 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 18:09:51 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <philo.h>
 
 static const char	*g_msg[] = {
 [FORK] = "has taken a fork",
@@ -20,9 +22,9 @@ static const char	*g_msg[] = {
 };
 
 #ifdef PRETTY
-# define FORMAT_MSG "%10lu ms - %3lu - %s\n"
+# define FORMAT_MSG "%10d ms - %3d - %s\n"
 #else
-# define FORMAT_MSG "%lu %lu %s\n"
+# define FORMAT_MSG "%d %d %s\n"
 #endif
 
 int32_t	philo_switch_queue(t_msg_queue *queue)
@@ -32,10 +34,10 @@ int32_t	philo_switch_queue(t_msg_queue *queue)
 	int32_t	*swap_action;
 	int32_t	msg_count;
 
-	pthread_mutex_lock(msg_mutex);
 	swap_time = queue->time[0];
 	swap_philo = queue->philo[0];
 	swap_action = queue->action[0];
+	pthread_mutex_lock(&queue->msg_mutex);
 	queue->time[0] = queue->time[1];
 	queue->philo[0] = queue->philo[1];
 	queue->action[0] = queue->action[1];
@@ -44,7 +46,7 @@ int32_t	philo_switch_queue(t_msg_queue *queue)
 	queue->action[1] = swap_action;
 	msg_count = queue->count;
 	queue->count = 0;
-	pthread_mutex_unlock(msg_mutex);
+	pthread_mutex_unlock(&queue->msg_mutex);
 	return (msg_count);
 }
 
@@ -74,14 +76,14 @@ void	philo_print_queue(t_msg_queue *queue)
 
 void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg)
 {
-	int32_t	count;
-	t_queue	queue;
+	int32_t		count;
+	t_msg_queue	*queue;
 
 	queue = philo->queue;
-	pthread_mutex_lock(msg_mutex);
+	pthread_mutex_lock(&queue->msg_mutex);
 	count = queue->count;
 	(queue->count)++;
-	pthread_mutex_unlock(msg_mutex);
+	pthread_mutex_unlock(&queue->msg_mutex);
 	queue->time[1][count] = time;
 	queue->philo[1][count] = philo->philo_id;
 	queue->action[1][count] = msg;

@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 17:01:40 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 18:49:00 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 
 //	DEFINES
 
-# define ERROR -1
-
 //	STRUCTURES AND ENUMS
 typedef struct s_public {
 	int32_t				nbr_philo;
@@ -61,7 +59,7 @@ typedef struct s_philo {
 	pthread_t			*thread;
 	int32_t				philo_id;
 	int32_t				nbr_meal_eaten;
-	unsigned long		time_last_meal;
+	int64_t				time_last_meal; // set in routine right after start
 	pthread_mutex_t		*fork_r;
 	pthread_mutex_t		*fork_l;
 	t_public			*public_data;
@@ -77,13 +75,13 @@ typedef enum e_msg {
 	END
 }	t_msg;
 
-typedef enum e_message {
+typedef enum e_err_msg {
 	SUCCESS,
 	ERR_ARG,
 	ERR_INP,
 	ERR_MEM,
 	ERR_THR,
-}	t_message;
+}	t_err_msg;
 
 //	FUNCTIONS
 
@@ -97,6 +95,7 @@ int32_t	philo_error(int32_t code);
 
 void	philo_free_alloc(t_philo *philos, pthread_mutex_t *forks, size_t limit);
 void	philo_free_queue(t_msg_queue *queue);
+void	philo_thread_join(t_philo *philos, size_t max_philos);
 
 //		UTILS
 //		utils: convert
@@ -110,5 +109,10 @@ void	*ph_calloc(size_t byte, size_t size);
 int32_t	ph_strlen(const char *inp);
 void	ph_putstr_fd(const int fd, const char *str);
 void	ph_putendl_fd(const int fd, const char *str);
+
+//		utils: time 
+void	time_sleep_ms(int64_t sleep_ms);
+int64_t	time_diff_ms(int64_t start, int64_t end);
+int64_t	time_of_day_ms(void);
 
 #endif

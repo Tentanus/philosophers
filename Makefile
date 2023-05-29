@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/05/29 16:17:49 by mweverli      ########   odam.nl          #
+#    Updated: 2023/05/29 17:51:22 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,14 @@ SRC			:=	philo/philo.c \
 				philo/philo_error.c \
 				philo/philo_free.c \
 				philo/philo_init.c \
+				philo/philo_message.c \
+				philo/philo_routine.c \
 				philo/philo_run.c \
 				\
 				utils/philo_utils_convert.c \
 				utils/philo_utils_mem.c \
-				utils/philo_utils_str.c
+				utils/philo_utils_str.c \
+				utils/philo_utils_time.c
 
 OBJ			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 SRC			:=	$(SRC:%=$(SRC_DIR)/%)
