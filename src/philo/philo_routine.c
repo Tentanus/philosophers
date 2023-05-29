@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 17:47:49 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 19:23:18 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 20:25:27 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,11 @@ void	*philo_routine(void *ptr)
 	philo->time_last_meal = time_of_day_ms();
 	if (philo->public_data->err == true)
 		return (NULL);
-	return (ptr);
+	if (philo->philo_id % 2 == 1)
+		go_think(philo);
+	while (1)
+	{
+		if (philo->)
+	}
+	return (NULL);
 }

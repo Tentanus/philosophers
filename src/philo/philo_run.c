@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 15:04:01 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 18:51:50 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 20:22:36 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int32_t	philo_run(t_public *info, t_philo *philos, t_msg_queue *queue)
 	if (philo_thread_create(philos, info) == ERR_THR)
 		return (ERR_THR);
 
+	time_sleep_ms(10);
 	info->time_start = time_of_day_ms();
 	pthread_mutex_unlock(&(info->start));
 	return (SUCCESS);
