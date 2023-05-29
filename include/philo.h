@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 18:49:00 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/29 19:29:27 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int32_t	ph_strlen(const char *inp);
 void	ph_putstr_fd(const int fd, const char *str);
 void	ph_putendl_fd(const int fd, const char *str);
 
-//		utils: time 
+//		utils: time
 void	time_sleep_ms(int64_t sleep_ms);
 int64_t	time_diff_ms(int64_t start, int64_t end);
 int64_t	time_of_day_ms(void);
