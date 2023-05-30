@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/30 12:47:04 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/30 16:24:16 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,12 @@ typedef enum e_err_msg {
 int32_t	philo_init(char **argv, t_public *info);
 int32_t	philo_alloc(t_public *info, t_philo **philos, t_msg_queue *queue);
 int32_t	philo_run(t_public *info, t_philo *philos, t_msg_queue *queue);
+void	philo_printer(t_msg_queue *queue);
 
 void	*philo_routine(void *ptr);
-void	*philo_printer(void *queue);
+void	*philo_watcher(void *queue);
 
-void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg)
+void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg);
 
 int32_t	philo_error(int32_t code);
 

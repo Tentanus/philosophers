@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/30 12:46:35 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/30 16:23:43 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,17 @@ static int32_t	printer_switch_queue(t_msg_queue *queue)
 	return (msg_count);
 }
 
-void	*philo_printer(void *ptr)
-{
-	int32_t	max_count;
-	int32_t	i;
-	t_msg_queue *queue;
+// choose which funcitonality the main thread should have :
+// - watcher thread 
+// - printer thread
+//
+// this is to be determined
 
-	queue = ptr;
+void	philo_printer(t_msg_queue *queue)
+{
+	int32_t		max_count;
+	int32_t		i;
+
 	while (1)
 	{
 		i = 0;
@@ -66,15 +70,16 @@ void	*philo_printer(void *ptr)
 			printf(FORMAT_MSG, queue->time[0][i], queue->philo[0][i], \
 				g_msg[queue->action[0][i]]);
 			if (queue->action[0][i] == DIE || queue->action[0][i] == END)
-				return (NULL);
+				return ;
 			i++;
 		}
-		time_sleep_ms(250);// this sleep may need som adjusting/fidling
 		ph_memset(queue->time[0], 0, sizeof(int32_t) * max_count);
 		ph_memset(queue->philo[0], 0, sizeof(int32_t) * max_count);
 		ph_memset(queue->action[0], 0, sizeof(int32_t) * max_count);
 	}
 }
+// maybe add following line after the while loop containing the printf:
+//		time_sleep_ms(250);// this sleep may need some adjusting/fidling might even be unnecesary
 
 void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg)
 {
