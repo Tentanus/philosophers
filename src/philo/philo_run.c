@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 15:04:01 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 20:22:36 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/30 11:57:24 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,6 @@ int32_t	philo_run(t_public *info, t_philo *philos, t_msg_queue *queue)
 	pthread_mutex_unlock(&(info->start));
 	return (SUCCESS);
 }
+
+
+// the watcher thread should input the DEATH or END message so it happens asap.p
