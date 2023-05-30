@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 17:47:49 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/30 12:05:59 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/30 12:10:35 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 typedef void	(*go_func) (t_philo *philo);
 
-void	go_eat(t_philo *philo) 
+void	go_eat(t_philo *philo)
 {
 	philo = NULL;
 }
 
-void	go_sleep(t_philo *philo) 
+void	go_sleep(t_philo *philo)
 {
 	philo = NULL;
 }
 
-void	go_think(t_philo *philo) 
+void	go_think(t_philo *philo)
 {
 	philo = NULL;
 }

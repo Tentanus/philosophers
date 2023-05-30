@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 18:09:51 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/05/30 12:46:35 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static const char	*g_msg[] = {
 # define FORMAT_MSG "%d %d %s\n"
 #endif
 
-int32_t	philo_switch_queue(t_msg_queue *queue)
+static int32_t	printer_switch_queue(t_msg_queue *queue)
 {
 	int32_t	*swap_time;
 	int32_t	*swap_philo;
@@ -50,21 +50,23 @@ int32_t	philo_switch_queue(t_msg_queue *queue)
 	return (msg_count);
 }
 
-void	philo_print_queue(t_msg_queue *queue)
+void	*philo_printer(void *ptr)
 {
 	int32_t	max_count;
 	int32_t	i;
+	t_msg_queue *queue;
 
+	queue = ptr;
 	while (1)
 	{
 		i = 0;
-		max_count = philo_switch_queue(queue);
+		max_count = printer_switch_queue(queue);
 		while (i < max_count)
 		{
 			printf(FORMAT_MSG, queue->time[0][i], queue->philo[0][i], \
 				g_msg[queue->action[0][i]]);
 			if (queue->action[0][i] == DIE || queue->action[0][i] == END)
-				return ;
+				return (NULL);
 			i++;
 		}
 		time_sleep_ms(250);// this sleep may need som adjusting/fidling
