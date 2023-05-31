@@ -50,12 +50,6 @@ static int32_t	printer_switch_queue(t_msg_queue *queue)
 	return (msg_count);
 }
 
-// choose which funcitonality the main thread should have :
-// - watcher thread 
-// - printer thread
-//
-// this is to be determined
-
 void	philo_printer(t_msg_queue *queue)
 {
 	int32_t		max_count;
@@ -92,6 +86,7 @@ void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg)
 	(queue->count)++;
 	pthread_mutex_unlock(&queue->msg_mutex);
 	queue->time[1][count] = time;
-	queue->philo[1][count] = philo->philo_id;
+	queue->philo[1][count] = philo->philo_id + 1;
 	queue->action[1][count] = msg;
+	// this can cause a racecondition or a wrong write when the 'books' are switched and the philo is still writing.
 }

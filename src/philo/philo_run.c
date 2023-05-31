@@ -52,6 +52,8 @@ int32_t	philo_run(t_public *info, t_philo *philos, t_msg_queue *queue)
 	info->time_start = time_of_day_ms();
 	pthread_mutex_unlock(&(info->start));
 	philo_printer(queue);
+	philo_thread_join(philos, info->nbr_philo);
+	pthread_join(watcher, NULL);
 	return (SUCCESS);
 }
 

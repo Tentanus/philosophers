@@ -92,7 +92,6 @@ int32_t	philo_run(t_public *info, t_philo *philos, t_msg_queue *queue);
 void	philo_printer(t_msg_queue *queue);
 
 void	*philo_routine(void *ptr);
-void	*philo_watcher(void *queue);
 
 void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg);
 
