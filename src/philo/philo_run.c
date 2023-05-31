@@ -12,6 +12,26 @@
 
 #include <philo.h>
 
+static void	*philo_watcher(void *ptr)
+{
+	t_philo		*philos;
+	size_t		i;
+	int32_t		diff;
+	int32_t		time_die;
+
+	philos = ptr;
+	time_die = philo[0].public_data->time_die;
+	while (1)
+	{
+		diff = time_diff_ms(time_of_day_ms(), philo[i].time_last_meal);
+		if (diff > time_die)
+		{
+			//filler line;
+		}
+		i++;
+	}
+}
+
 static int32_t	philo_thread_create(t_philo *philos, t_public *info, \
 		pthread_t *watcher)
 {
