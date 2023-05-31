@@ -15,22 +15,28 @@
 static void	*philo_watcher(void *ptr)
 {
 	t_philo		*philos;
+	t_public	*public;
 	size_t		i;
 	int32_t		diff;
 	int32_t		time_die;
 
 	philos = ptr;
-	time_die = philo[0].public_data->time_die;
+	public = philo[0].public_data;
+	time_die = public->time_die;
 	while (1)
 	{
-		diff = time_diff_ms(time_of_day_ms(), philo[i].time_last_meal);
-		if (diff > time_die)
+		diff = time_diff_ms(time_of_day_ms(), philos[i].time_last_meal);	//mutex to make sure no race condition happens
+		if (diff >= time_die)
 		{
-			//filler line;
+			philo_queue_message(&philo[i], time_diff_ms(public->time_start, time_of_day_ms()) DIE);
+			public->err = true;
+			break ;
 		}
 		i++;
 	}
+	return (NULL);
 }
+// END condition isn't worked in.
 
 static int32_t	philo_thread_create(t_philo *philos, t_public *info, \
 		pthread_t *watcher)
