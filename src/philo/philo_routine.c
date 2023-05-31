@@ -12,21 +12,31 @@
 
 #include <philo.h>
 
-typedef void				(*t_go_action) (t_philo *philo);
+typedef void				(*t_go_action) \
+							(t_philo *philo, const int64_t sim_start);
 
-void	go_eat(t_philo *philo)
+void	go_eat(t_philo *philo, const int64_t sim_start)
 {
-	philo = NULL;
+	philo->status = SLEEP;
+	(void) sim_start;
 }
 
-void	go_sleep(t_philo *philo)
+void	go_sleep(t_philo *philo, const int64_t sim_start)
 {
-	philo = NULL;
+	const int64_t	start_sleep = time_of_day_ms();
+
+	philo_queue_message(philo, time_diff_ms(sim_start, start_sleep), SLEEP);
+	time_sleep_ms(philo->public_data->time_sleep - \
+		time_diff_ms(start_sleep, time_of_day_ms()));
+	philo->status = THINK;
 }
 
-void	go_think(t_philo *philo)
+void	go_think(t_philo *philo, const int64_t sim_start)
 {
-	philo = NULL;
+	const int64_t	start_think = time_of_day_ms();
+
+	philo_queue_message(philo, time_diff_ms(sim_start, start_think), THINK);
+	philo->status = EAT;
 }
 
 static const t_go_action	g_func[4] = {
@@ -39,20 +49,25 @@ static const t_go_action	g_func[4] = {
 void	*philo_routine(void *ptr)
 {
 	t_philo	*philo;
+	int64_t	sim_start;
 
 	philo = ptr;
+	sim_start = philo->public_data->time_start;
 	pthread_mutex_lock(&philo->public_data->start);
 	pthread_mutex_unlock(&philo->public_data->start);
 	philo->time_last_meal = time_of_day_ms();
 	if (philo->public_data->err == true)
 		return (NULL);
 	if (philo->philo_id % 2 == 1)
-		go_think(philo);
+	{
+		go_think(philo, sim_start);
+		time_sleep_ms(philo->public_data->time_eat / 2);
+	}
 	while (1)
 	{
-		if (philo->status == DIE || philo->status == END)
+		if (philo->public_data->err == true)
 			break ;
-		g_func[philo->status](philo);
+		g_func[philo->status](philo, sim_start);
 	}
 	return (NULL);
 }
