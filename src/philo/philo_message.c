@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/30 16:23:43 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/01 14:47:25 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,8 @@ void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg)
 	pthread_mutex_lock(&queue->msg_mutex);
 	count = queue->count;
 	(queue->count)++;
-	pthread_mutex_unlock(&queue->msg_mutex);
 	queue->time[1][count] = time;
 	queue->philo[1][count] = philo->philo_id + 1;
 	queue->action[1][count] = msg;
-	// this can cause a racecondition or a wrong write when the 'books' are switched and the philo is still writing.
+	pthread_mutex_unlock(&queue->msg_mutex);
 }

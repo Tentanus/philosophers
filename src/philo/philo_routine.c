@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 17:47:49 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/30 16:19:33 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/01 15:36:52 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	go_sleep(t_philo *philo, const int64_t sim_start)
 		time_diff_ms(start_sleep, time_of_day_ms()));
 	philo->status = THINK;
 }
+
+//	waiting time for wait on mutex doesn't have to be included 
 
 void	go_think(t_philo *philo, const int64_t sim_start)
 {
