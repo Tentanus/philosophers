@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 17:47:49 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/01 15:36:52 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/02 21:56:58 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,23 @@ typedef void				(*t_go_action) \
 
 void	go_eat(t_philo *philo, const int64_t sim_start)
 {
+	int64_t	start_eat;
+
+	pthread_mutex_lock(philo->fork_r);
+	philo_queue_message(philo, time_diff_ms(sim_start, time_of_day_ms()), FORK);
+	pthread_mutex_lock(philo->fork_l);
+	philo_queue_message(philo, time_diff_ms(sim_start, time_of_day_ms()), FORK);
+	start_eat = time_of_day_ms();
+	philo_queue_message(philo, time_diff_ms(sim_start, start_eat), EAT);
+	pthread_mutex_lock(&philo->eating);
+	philo->time_last_meal = start_eat;
+	philo->nbr_meal_eaten += 1;
+	time_sleep_ms(philo->public_data->time_eat - \
+			time_diff_ms(start_eat, time_of_day_ms()));
+	pthread_mutex_unlock(philo->fork_r);
+	pthread_mutex_unlock(philo->fork_l);
+	pthread_mutex_unlock(&philo->eating);
 	philo->status = SLEEP;
-	(void) sim_start;
 }
 
 void	go_sleep(t_philo *philo, const int64_t sim_start)

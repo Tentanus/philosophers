@@ -44,7 +44,7 @@ DIR_LIST	:=	$(sort $(dir $(OBJ)))
 #============= COMPILATION ==============#
 
 INCLUDE		:=	-I $(INC_DIR)
-LIBRARY		:=	-lpthread
+LIBRARY		:=	-pthread
 
 CC			:=	gcc
 CFL			:=	-Wall -Werror -Wextra

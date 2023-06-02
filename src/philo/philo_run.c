@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 15:04:01 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/30 16:21:17 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/02 22:38:38 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,24 @@ static void	*philo_watcher(void *ptr)
 	int32_t		time_die;
 
 	philos = ptr;
-	public = philo[0].public_data;
+	public = philos[0].public_data;
 	time_die = public->time_die;
+	i = 0;
 	while (1)
 	{
+		pthread_mutex_lock(&(philos[i].eating));
 		diff = time_diff_ms(time_of_day_ms(), philos[i].time_last_meal);	//mutex to make sure no race condition happens
+		pthread_mutex_unlock(&philos[i].eating);
 		if (diff >= time_die)
 		{
-			philo_queue_message(&philo[i], time_diff_ms(public->time_start, time_of_day_ms()) DIE);
+			philo_queue_message(&philos[i], time_diff_ms(public->time_start, time_of_day_ms()), DIE);
 			public->err = true;
 			break ;
 		}
-		i++;
+		if (i == (size_t) public->nbr_philo - 1)
+			i = 0;
+		else
+			i++;
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/23 13:54:53 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/26 21:23:14 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/02 20:06:46 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	*ph_memset(void *ptr, int c, size_t len)
 	b = ptr;
 	while (len > 0)
 	{
-		b[len] = c;
+		*b = c;
+		b++;
 		len--;
 	}
 	return (ptr);

@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/01 18:32:22 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/02 22:38:17 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_philo {
 	int32_t				nbr_meal_eaten;
 	int32_t				status;
 	int64_t				time_last_meal;
+	pthread_mutex_t		eating;
 	pthread_mutex_t		*fork_r;
 	pthread_mutex_t		*fork_l;
 	t_public			*public_data;
@@ -116,7 +117,7 @@ void	ph_putendl_fd(const int fd, const char *str);
 
 //		utils: time
 void	time_sleep_ms(int64_t sleep_ms);
-int64_t	time_diff_ms(int64_t start, int64_t end);
+int32_t	time_diff_ms(int64_t start, int64_t end);
 int64_t	time_of_day_ms(void);
 
 #endif
