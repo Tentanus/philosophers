@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/02 22:38:17 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/02 23:04:14 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	philo_printer(t_msg_queue *queue);
 
 void	*philo_routine(void *ptr);
 
-void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg);
+void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg);
 
 int32_t	philo_error(int32_t code);
 

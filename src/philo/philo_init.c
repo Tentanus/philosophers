@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:36:12 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/02 22:37:07 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/02 22:57:59 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ static int32_t	philo_alloc_queue(t_msg_queue *queue, int32_t nbr_philo)
 static int32_t	philo_alloc_fill(t_philo *philos, pthread_mutex_t *forks, \
 		t_msg_queue *queue, size_t nbr)
 {
+	philos->thread = ph_calloc(sizeof(pthread_t), 1);
+	if (!(philos->thread))
+		return (ERR_MEM);
 	philos->philo_id = nbr + 1;
 	philos->nbr_meal_eaten = 0;
 	philos->time_last_meal = 0;

@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 17:47:49 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/02 21:56:58 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/02 23:07:50 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,16 @@ void	*philo_routine(void *ptr)
 	int64_t	sim_start;
 
 	philo = ptr;
-	sim_start = philo->public_data->time_start;
 	pthread_mutex_lock(&philo->public_data->start);
 	pthread_mutex_unlock(&philo->public_data->start);
+	sim_start = philo->public_data->time_start;
 	philo->time_last_meal = time_of_day_ms();
 	if (philo->public_data->err == true)
 		return (NULL);
 	if (philo->philo_id % 2 == 1)
 	{
 		go_think(philo, sim_start);
-		time_sleep_ms(philo->public_data->time_eat / 2);
+		time_sleep_ms((philo->public_data->time_eat) / 2);
 	}
 	while (1)
 	{

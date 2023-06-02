@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/01 14:47:25 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/02 23:03:44 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	philo_printer(t_msg_queue *queue)
 // maybe add following line after the while loop containing the printf:
 //		time_sleep_ms(250);// this sleep may need some adjusting/fidling might even be unnecesary
 
-void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg)
+void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg)
 {
 	int32_t		count;
 	t_msg_queue	*queue;
@@ -85,7 +85,7 @@ void	philo_queue_message(t_philo *philo, int64_t time, t_msg msg)
 	count = queue->count;
 	(queue->count)++;
 	queue->time[1][count] = time;
-	queue->philo[1][count] = philo->philo_id + 1;
+	queue->philo[1][count] = philo->philo_id;
 	queue->action[1][count] = msg;
 	pthread_mutex_unlock(&queue->msg_mutex);
 }
