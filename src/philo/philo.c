@@ -6,12 +6,12 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/03 17:58:42 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/03 20:04:40 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
-
+/*
 static void	philo_print(t_philo *philos, t_public info)
 {
 	int32_t	i;
@@ -40,7 +40,7 @@ static void	philo_print(t_philo *philos, t_public info)
 	}
 	printf("\n\t-=-\tEND PRINT\t-=-\n");
 }
-
+*/
 static int	philo_single(t_public info)
 {
 	printf("%d %d has taken a fork\n", 0, 1);
@@ -66,7 +66,7 @@ int	main(int argc, char **argv)
 		return (philo_error(ERR_MEM));
 	if (philo_run(&info, philos, &queue) != SUCCESS)
 		return (philo_error(ERR_THR));
-	philo_print(philos, info); // this line needs removal when finished
+//	philo_print(philos, info); // this line needs removal when finished
 	philo_free_queue(&queue);
 	return (SUCCESS);
 }

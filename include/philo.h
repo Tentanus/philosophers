@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/02 23:04:14 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/03 18:56:19 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@
 # include <stdio.h>
 
 //	DEFINES
+
+#ifdef PRETTY
+# define FORMAT_MSG "%10d ms - %3d - %s\n"
+#else
+# define FORMAT_MSG "%d %d %s\n"
+#endif
 
 //	STRUCTURES AND ENUMS
 typedef struct s_public {

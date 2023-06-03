@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 15:04:01 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/03 16:59:48 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/03 20:08:39 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ static void	*philo_watcher(void *ptr)
 		if (diff >= time_die)
 		{
 			philo_queue_message(&philos[i], time_diff_ms(public->time_start, time_of_day_ms()), DIE);
+			printf(FORMAT_MSG, time_diff_ms(public->time_start, time_of_day_ms()), philos[i].philo_id, "has died");
 			public->err = true;
 			break ;
 		}
+		if (public->nbr_full_philo == public->nbr_philo)
+			return (NULL);
 		if (i == (size_t) public->nbr_philo - 1)
 			i = 0;
 		else

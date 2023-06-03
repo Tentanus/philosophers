@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/25 18:13:27 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/05/29 17:41:01 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/03 20:03:48 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,8 @@ void	philo_thread_join(t_philo *philos, size_t max_philos)
 
 	i = 0;
 	while (i < max_philos)
+	{
 		pthread_join(*philos[i].thread, NULL);
+		i++;
+	}
 }
