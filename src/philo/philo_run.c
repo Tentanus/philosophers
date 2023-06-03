@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 15:04:01 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/02 22:38:38 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/03 16:59:48 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	*philo_watcher(void *ptr)
 	while (1)
 	{
 		pthread_mutex_lock(&(philos[i].eating));
-		diff = time_diff_ms(time_of_day_ms(), philos[i].time_last_meal);	//mutex to make sure no race condition happens
+		diff = time_diff_ms(philos[i].time_last_meal, time_of_day_ms());	//mutex to make sure no race condition happens
 		pthread_mutex_unlock(&philos[i].eating);
 		if (diff >= time_die)
 		{
