@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:36:12 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/02 22:57:59 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/03 18:05:19 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int32_t	philo_alloc_queue(t_msg_queue *queue, int32_t nbr_philo)
 		queue->action[0] == NULL || \
 		queue->action[1] == NULL)
 		return (philo_free_queue(queue), ERR_MEM);
+	pthread_mutex_init(&queue->msg_mutex, NULL);
 	return (SUCCESS);
 }
 
@@ -39,6 +40,7 @@ static int32_t	philo_alloc_fill(t_philo *philos, pthread_mutex_t *forks, \
 		return (ERR_MEM);
 	philos->philo_id = nbr + 1;
 	philos->nbr_meal_eaten = 0;
+	philos->status = EAT;
 	philos->time_last_meal = 0;
 	pthread_mutex_init(&philos->eating, NULL);
 	philos->fork_r = &forks[nbr];
