@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/05/29 17:51:22 by mweverli      ########   odam.nl          #
+#    Updated: 2023/06/03 18:35:16 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,10 @@ endif
 
 ifdef FSAN
 CFL			+=	-fsanitize=address -fsanitize=undefined
+endif
+
+ifdef PRTY
+CFL			+=	-D PRETTY=1
 endif
 
 COMPILE		:=	$(CC) $(CFL)
