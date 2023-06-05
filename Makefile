@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/06/03 18:35:16 by mweverli      ########   odam.nl          #
+#    Updated: 2023/06/05 19:36:10 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ INC_DIR		:=	include
 LIB_DIR		:=	lib
 
 SRC			:=	philo/philo.c \
+				philo/philo_actions.c \
 				philo/philo_error.c \
 				philo/philo_free.c \
 				philo/philo_init.c \
