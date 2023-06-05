@@ -6,41 +6,12 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/03 20:04:40 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/05 16:39:02 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
-/*
-static void	philo_print(t_philo *philos, t_public info)
-{
-	int32_t	i;
 
-	printf("\t-=-\tPHILO PRINT\t-=-\n\n");
-	printf("|   INFO:\n");
-	printf("|number of philos:\t%d\n", info.nbr_philo);
-	printf("|full philos:\t\t%d\n", info.nbr_full_philo);
-	printf("|number of meals:\t%d\n", info.nbr_meal);
-	printf("|time to die:\t\t%d\n", info.time_die);
-	printf("|time to eat:\t\t%d\n", info.time_eat);
-	printf("|time to sleep:\t\t%d\n", info.time_sleep);
-	printf("|__________________________\n\n");
-	i = 0;
-	while (i < info.nbr_philo)
-	{
-		printf("|\tPHILO [%d]\n", philos[i].philo_id);
-		printf("|thread:\t\t\t%p\n", philos[i].thread);
-		printf("|meals had:\t\t%d\n", philos[i].nbr_meal_eaten);
-		printf("|time last:\t\t%lld\n", philos[i].time_last_meal);
-		printf("|fork R:\t\t\t%p\n", philos[i].fork_r);
-		printf("|fork L:\t\t\t%p\n", philos[i].fork_l);
-		printf("|info address:\t%p\n", philos[i].public_data);
-		printf("|__________________________\n\n");
-		i++;
-	}
-	printf("\n\t-=-\tEND PRINT\t-=-\n");
-}
-*/
 static int	philo_single(t_public info)
 {
 	printf("%d %d has taken a fork\n", 0, 1);
@@ -64,15 +35,11 @@ int	main(int argc, char **argv)
 		return (philo_single(info));
 	if (philo_alloc(&info, &philos, &queue) != SUCCESS)
 		return (philo_error(ERR_MEM));
-	if (philo_run(&info, philos, &queue) != SUCCESS)
+	if (philo_run(&info, philos) != SUCCESS)
 		return (philo_error(ERR_THR));
-//	philo_print(philos, info); // this line needs removal when finished
 	philo_free_queue(&queue);
 	return (SUCCESS);
 }
 
-//	Make my own sleep function. [usleep] doesn't work precisely enough and can cause dataraces
 //
-//	make overviewing thread
 //	make sure mutex_locks are removed after a philo dies
-//	Use a mutex lock on my write function so write function won't be used twice 

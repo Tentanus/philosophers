@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/03 18:56:19 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/05 19:50:03 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,22 @@
 
 //	INCLUDE
 
-# include <unistd.h>		// usleep,
-# include <stdlib.h>		// write,
-# include <sys/time.h>		// gettimeofday, 
+# include <unistd.h>
+# include <stdlib.h>
+# include <sys/time.h>
 # include <pthread.h>
-							//int	pthread_detach
-							//int	pthread_join
-							//int	pthread_mutex_destroy
-							//int	pthread_mutex_init
-							//int	pthread_mutex_lock
-							//int	pthread_mutex_unlock
 # include <stdlib.h>
 # include <limits.h>
 # include <stdbool.h>
-
-//		PERSONAL INCLUDES
 # include <stdio.h>
 
 //	DEFINES
 
-#ifdef PRETTY
-# define FORMAT_MSG "%10d ms - %3d - %s\n"
-#else
-# define FORMAT_MSG "%d %d %s\n"
-#endif
+# ifdef PRETTY
+#  define FORMAT_MSG "%10d ms - %3d - %s\n"
+# else
+#  define FORMAT_MSG "%d %d %s\n"
+# endif
 
 //	STRUCTURES AND ENUMS
 typedef struct s_public {
@@ -57,7 +49,7 @@ typedef struct s_msg_queue{
 	int32_t				*time[2];
 	int32_t				*philo[2];
 	int32_t				*action[2];
-	int32_t				count;	// mutexed
+	int32_t				count;
 	pthread_mutex_t		msg_mutex;
 }	t_msg_queue;
 
@@ -95,20 +87,25 @@ typedef enum e_err_msg {
 
 int32_t	philo_init(char **argv, t_public *info);
 int32_t	philo_alloc(t_public *info, t_philo **philos, t_msg_queue *queue);
-int32_t	philo_run(t_public *info, t_philo *philos, t_msg_queue *queue);
-void	philo_printer(t_msg_queue *queue);
-
-void	*philo_routine(void *ptr);
-
-void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg);
+int32_t	philo_run(t_public *info, t_philo *philos);
 
 int32_t	philo_error(int32_t code);
+
+void	*philo_printer(void *ptr);
+void	*philo_routine(void *ptr);
+
+void	go_eat(t_philo *philo, const int64_t sim_start);
+void	go_sleep(t_philo *philo, const int64_t sim_start);
+void	go_think(t_philo *philo, const int64_t sim_start);
+
+void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg);
 
 void	philo_free_alloc(t_philo *philos, pthread_mutex_t *forks, size_t limit);
 void	philo_free_queue(t_msg_queue *queue);
 void	philo_thread_join(t_philo *philos, size_t max_philos);
 
 //		UTILS
+
 //		utils: convert
 int32_t	ph_atoi(char *inp);
 
