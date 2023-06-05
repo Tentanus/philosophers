@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/05 19:35:37 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/05 21:51:57 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/05 22:21:49 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	go_eat(t_philo *philo, const int64_t sim_start)
 	philo_queue_message(philo, time_diff_ms(sim_start, start_eat), EAT);
 	pthread_mutex_lock(&philo->eating);
 	philo->time_last_meal = start_eat;
-	philo->nbr_meal_eaten += 1;
 	pthread_mutex_unlock(&philo->eating);
 	time_sleep_ms(time_eat);
+	philo->nbr_meal_eaten += 1;
 	pthread_mutex_unlock(philo->fork_l);
 	pthread_mutex_unlock(philo->fork_r);
 	philo->status = SLEEP;

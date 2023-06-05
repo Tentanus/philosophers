@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 15:04:01 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/05 21:44:56 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/05 22:24:39 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,24 @@ static bool	check_death(int32_t diff, int32_t time_die, t_philo *philo)
 	return (true);
 }
 
-static bool check_full_philos(t_public *public)
+static bool check_full_philos(t_philo *philo, t_public *public)
 {
 	int32_t	full_philos;
 	int32_t	nbr_meals;
+	int32_t	time_start;;
 
 	pthread_mutex_lock(&public->start);
 	full_philos = public->nbr_full_philo;
 	nbr_meals = public->nbr_meal;
-	pthread_mutex_unlock(&public->start);
 	if (full_philos == nbr_meals)
+	{
+		public->err = true;
+		time_start = public->time_start;
+		pthread_mutex_unlock(&public->start);
+		//printf message;
 		return (true);
+	}
+	pthread_mutex_unlock(&public->start);
 	return (false);
 }
 
@@ -57,7 +64,7 @@ static void	philo_watcher(t_philo *philos)
 		pthread_mutex_unlock(&philos[i].eating);
 		if (check_death(diff_time, time_die, &philos[i]))
 				break ;
-		if (check_full_philos(public))
+		if (check_full_philos(&philos[i], public))
 				break ;
 		if (i == (size_t) public->nbr_philo - 1)
 			i = -1;
