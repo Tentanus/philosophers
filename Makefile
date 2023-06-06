@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/06/05 19:36:10 by mweverli      ########   odam.nl          #
+#    Updated: 2023/06/06 14:05:33 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ INCLUDE		:=	-I $(INC_DIR)
 LIBRARY		:=	-pthread
 
 CC			:=	gcc
-CFL			:=	-Wall -Werror -Wextra
+CFL			:=	-Wall -Werror -Wextra -Wpedantic
 
 ifdef DEBUG
 CFL			+=	-g
