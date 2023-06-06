@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 17:47:49 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/05 21:51:43 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/06 13:24:56 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,12 @@ static bool	start_sequence(t_philo *philo, int64_t *sim_start)
 
 	pthread_mutex_lock(&philo->public_data->start);
 	*sim_start = philo->public_data->time_start;
+	pthread_mutex_lock(&philo->eating);
 	philo->time_last_meal = *sim_start;
+	pthread_mutex_unlock(&philo->eating);
 	err = philo->public_data->err;
 	pthread_mutex_unlock(&philo->public_data->start);
 	return (err);
-}
-
-static void	check_belly(t_philo *philo)
-{
-	int32_t	current_meals_ate;
-	int32_t	required_meals;
-
-	current_meals_ate = philo->nbr_meal_eaten;
-	pthread_mutex_lock(&philo->public_data->start);
-	required_meals = philo->public_data->nbr_meal;
-	if (current_meals_ate == required_meals)
-		(philo->public_data->nbr_full_philo)++;
-	pthread_mutex_unlock(&philo->public_data->start);
 }
 
 static const t_go_action	g_func[4] = {
@@ -76,7 +65,6 @@ void	*philo_routine(void *ptr)
 	{
 		if (check_err(philo))
 			break ;
-		check_belly(philo);
 		g_func[philo->status](philo, sim_start);
 	}
 	return (NULL);

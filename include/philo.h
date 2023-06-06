@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/05 19:50:03 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/06 13:47:14 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 //	DEFINES
 
 # ifdef PRETTY
-#  define FORMAT_MSG "%10d ms - %3d - %s\n"
+#  define FORMAT_MSG "%6d ms\t%3d\t%s\n"
 # else
 #  define FORMAT_MSG "%d %d %s\n"
 # endif

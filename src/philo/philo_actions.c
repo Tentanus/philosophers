@@ -6,11 +6,24 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/05 19:35:37 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/05 22:21:49 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/06 13:31:05 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
+
+static void	check_belly(t_philo *philo)
+{
+	int32_t	current_meals_ate;
+	int32_t	required_meals;
+
+	current_meals_ate = philo->nbr_meal_eaten;
+	pthread_mutex_lock(&philo->public_data->start);
+	required_meals = philo->public_data->nbr_meal;
+	if (current_meals_ate == required_meals)
+		philo->public_data->nbr_full_philo += 1;
+	pthread_mutex_unlock(&philo->public_data->start);
+}
 
 void	go_eat(t_philo *philo, const int64_t sim_start)
 {
@@ -21,9 +34,9 @@ void	go_eat(t_philo *philo, const int64_t sim_start)
 	time_eat = philo->public_data->time_eat;
 	pthread_mutex_unlock(&philo->public_data->start);
 	pthread_mutex_lock(philo->fork_r);
-	//philo_queue_message(philo, time_diff_ms(sim_start, time_of_day_ms()), FORK);
+	philo_queue_message(philo, time_diff_ms(sim_start, time_of_day_ms()), FORK);
 	pthread_mutex_lock(philo->fork_l);
-	//philo_queue_message(philo, time_diff_ms(sim_start, time_of_day_ms()), FORK);
+	philo_queue_message(philo, time_diff_ms(sim_start, time_of_day_ms()), FORK);
 	start_eat = time_of_day_ms();
 	philo_queue_message(philo, time_diff_ms(sim_start, start_eat), EAT);
 	pthread_mutex_lock(&philo->eating);
@@ -34,6 +47,7 @@ void	go_eat(t_philo *philo, const int64_t sim_start)
 	pthread_mutex_unlock(philo->fork_l);
 	pthread_mutex_unlock(philo->fork_r);
 	philo->status = SLEEP;
+	check_belly(philo);
 }
 
 void	go_sleep(t_philo *philo, const int64_t sim_start)
