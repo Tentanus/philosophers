@@ -15,12 +15,12 @@
 static int32_t	philo_alloc_queue(t_msg_queue *queue, int32_t nbr_philo)
 {
 	ph_memset(queue, 0, sizeof(t_msg_queue));
-	queue->time[0] = ph_calloc(sizeof(int32_t), 4 * nbr_philo);
-	queue->time[1] = ph_calloc(sizeof(int32_t), 4 * nbr_philo);
-	queue->philo[0] = ph_calloc(sizeof(int32_t), 4 * nbr_philo);
-	queue->philo[1] = ph_calloc(sizeof(int32_t), 4 * nbr_philo);
-	queue->action[0] = ph_calloc(sizeof(int32_t), 4 * nbr_philo);
-	queue->action[1] = ph_calloc(sizeof(int32_t), 4 * nbr_philo);
+	queue->time[0] = ph_calloc(sizeof(int32_t), QUEUE_MULTIPLIER * nbr_philo);
+	queue->time[1] = ph_calloc(sizeof(int32_t), QUEUE_MULTIPLIER * nbr_philo);
+	queue->philo[0] = ph_calloc(sizeof(int32_t), QUEUE_MULTIPLIER * nbr_philo);
+	queue->philo[1] = ph_calloc(sizeof(int32_t), QUEUE_MULTIPLIER * nbr_philo);
+	queue->action[0] = ph_calloc(sizeof(int32_t), QUEUE_MULTIPLIER * nbr_philo);
+	queue->action[1] = ph_calloc(sizeof(int32_t), QUEUE_MULTIPLIER * nbr_philo);
 	if (queue->time[0] == NULL || \
 		queue->time[1] == NULL || \
 		queue->philo[0] == NULL || \
@@ -71,7 +71,7 @@ int32_t	philo_alloc(t_public *info, t_philo **philos, t_msg_queue *queue)
 	{
 		philos[0][i].public_data = info;
 		if (philo_alloc_fill(&philos[0][i], forks, queue, i) != SUCCESS)
-			return (philo_free_alloc(*philos, forks, i), ERR_MEM);
+			return (philo_free_philos(*philos, forks, i), ERR_MEM);
 		i++;
 	}
 	return (SUCCESS);

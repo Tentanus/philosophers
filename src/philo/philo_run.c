@@ -41,7 +41,7 @@ static bool	check_full_philos(t_philo *philo, t_public *public)
 		public->err = true;
 		time_start = public->time_start;
 		pthread_mutex_unlock(&public->start);
-		philo_queue_message(philo, \
+		philo_queue_message(&philo[nbr_philo - 1], \
 				time_diff_ms(time_start, time_of_day_ms()), END);
 		return (true);
 	}
@@ -65,7 +65,7 @@ static void	philo_watcher(t_philo *philos)
 		pthread_mutex_unlock(&philos[i].eating);
 		if (check_death(diff_time, time_die, &philos[i]))
 			break ;
-		if (check_full_philos(&philos[i], public))
+		if (check_full_philos(philos, public))
 			break ;
 		if (i == (size_t) public->nbr_philo - 1)
 			i = -1;

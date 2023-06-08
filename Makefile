@@ -59,7 +59,7 @@ CFL			+=	-fsanitize=thread
 endif
 
 ifdef FSAN
-CFL			+=	-fsanitize=address -fsanitize=undefined
+CFL			+=	-fsanitize=address -fsanitize=undefined -D FSAN=1
 endif
 
 ifdef PRTY
@@ -93,7 +93,8 @@ $(DIR_LIST):
 
 $(NAME): $(OBJ)
 	@echo ""
-	@$(COMPILE) $(INCLUDE) $(LIBRARY) $(OBJ) -o $(NAME)
+	$(COMPILE) $(INCLUDE) $(LIBRARY) $(OBJ) -o $(NAME)
+	@echo ""
 	@echo "$(COMPILE) $(INCLUDE) $(LIBRARY) $(CYAN)$(notdir $(OBJ))$(RESET) -o $(NAME)"
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c

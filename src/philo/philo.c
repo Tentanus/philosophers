@@ -37,7 +37,8 @@ int	main(int argc, char **argv)
 		return (philo_error(ERR_MEM));
 	if (philo_run(&info, philos) != SUCCESS)
 		return (philo_error(ERR_THR));
-	philo_free_queue(&queue);
+	philo_free_queue(philos[0].queue);
+	philo_free_philos(philos, philos[0].fork_r, info.nbr_philo);
 	return (SUCCESS);
 }
 

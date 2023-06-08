@@ -18,7 +18,7 @@ static const char	*g_msg[] = {
 [SLEEP] = "is sleeping",
 [THINK] = "is thinking",
 [DIE] = "died",
-[END] = "philos ate enough, ending simulation"
+[END] = "philos have eaten enough.\n\t-=- Ending Simulation -=-"
 };
 
 static int32_t	printer_switch_queue(t_msg_queue *queue)
@@ -63,7 +63,6 @@ void	*philo_printer(void *ptr)
 				return (NULL);
 			i++;
 		}
-		time_sleep_ms(1);
 	}
 	return (NULL);
 }
