@@ -104,7 +104,7 @@ void	go_eat(t_philo *philo, const int64_t sim_start);
 void	go_sleep(t_philo *philo, const int64_t sim_start);
 void	go_think(t_philo *philo, const int64_t sim_start);
 
-void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg);
+bool	philo_queue_message(t_philo *philo, int32_t time, t_msg msg);
 
 void	philo_free_philos(t_philo *philos, pthread_mutex_t *forks, size_t limit);
 void	philo_free_queue(t_msg_queue *queue);

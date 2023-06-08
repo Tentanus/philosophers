@@ -62,20 +62,31 @@ void	*philo_printer(void *ptr)
 			if (queue->action[0][i] == DIE || queue->action[0][i] == END)
 				return (NULL);
 			i++;
+			time_sleep_ms(1);
 		}
 	}
 	return (NULL);
 }
 
-void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg)
+bool	philo_queue_message(t_philo *philo, int32_t time, t_msg msg)
 {
 	int32_t		count;
+	int32_t		nbr_philo;
 
+	pthread_mutex_lock(&philo->public_data->start);
+	nbr_philo = philo->public_data->nbr_philo;
+	pthread_mutex_unlock(&philo->public_data->start);
 	pthread_mutex_lock(&philo->queue->msg_mutex);
 	count = philo->queue->count;
+	if (count >= (QUEUE_MULTIPLIER * nbr_philo) - ((int32_t)sizeof(int32_t) * 4))
+	{
+		pthread_mutex_unlock(&philo->queue->msg_mutex);
+		return (false);
+	}
 	philo->queue->time[1][count] = time;
 	philo->queue->philo[1][count] = philo->philo_id;
 	philo->queue->action[1][count] = msg;
 	(philo->queue->count)++;
 	pthread_mutex_unlock(&philo->queue->msg_mutex);
+	return (true);
 }
