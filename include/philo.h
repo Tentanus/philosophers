@@ -27,6 +27,7 @@
 //	DEFINES
 
 # define QUEUE_MULTIPLIER 5
+
 # ifdef PRETTY
 #  define FORMAT_MSG "%6d ms\t%3d\t%s\n"
 # else
@@ -103,8 +104,12 @@ void	go_think(t_philo *philo, const int64_t sim_start);
 
 void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg);
 
+<<<<<<< HEAD
 void	philo_free_philos(t_philo *philos, pthread_mutex_t *forks, \
 		size_t limit);
+=======
+void	philo_free_alloc(t_philo *philos, pthread_mutex_t *forks, size_t limit);
+>>>>>>> d82d586 (revert changes)
 void	philo_free_queue(t_msg_queue *queue);
 void	philo_thread_join(t_philo *philos, size_t max_philos);
 
