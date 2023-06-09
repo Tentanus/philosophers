@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/09 15:35:39 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/09 17:08:15 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,7 @@
 
 //	DEFINES
 
-# ifdef FSAN
-#  define QUEUE_MULTIPLIER 20
-# else
-#  define QUEUE_MULTIPLIER 10
-# endif
-
+# define QUEUE_MULTIPLIER 10
 # ifdef PRETTY
 #  define FORMAT_MSG "%6d ms\t%3d\t%s\n"
 # else

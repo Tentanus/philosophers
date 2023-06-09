@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/09 15:35:03 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/09 17:04:15 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	*philo_printer(void *ptr)
 		pthread_mutex_lock(&queue->msg_mutex);
 		max_count = printer_switch_queue(queue);
 		pthread_mutex_unlock(&queue->msg_mutex);
-		while (i <= max_count)
+		while (i < max_count)
 		{
 			printf(FORMAT_MSG, queue->time[0][i], queue->philo[0][i], \
 				g_msg[queue->action[0][i]]);
@@ -63,6 +63,7 @@ void	*philo_printer(void *ptr)
 				return (NULL);
 			i++;
 		}
+		time_sleep_ms(1);
 	}
 	return (NULL);
 }
