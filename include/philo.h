@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/09 17:08:15 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/09 17:51:16 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 //	DEFINES
 
-# define QUEUE_MULTIPLIER 10
+# define QUEUE_MULTIPLIER 5
 # ifdef PRETTY
 #  define FORMAT_MSG "%6d ms\t%3d\t%s\n"
 # else
@@ -74,7 +74,8 @@ typedef enum e_msg {
 	SLEEP,
 	THINK,
 	DIE,
-	END
+	END,
+	ERROR
 }	t_msg;
 
 typedef enum e_err_msg {

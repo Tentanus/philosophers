@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/09 17:04:15 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/09 17:49:19 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static const char	*g_msg[] = {
 [SLEEP] = "is sleeping",
 [THINK] = "is thinking",
 [DIE] = "died",
-[END] = "philos have eaten enough.\n\t-=- Ending Simulation -=-"
+[END] = "philos have eaten enough.\n\t-=- Ending Simulation -=-",
+[ERROR] = "ERROR occured during sim"
 };
 
 static int32_t	printer_switch_queue(t_msg_queue *queue)
@@ -59,7 +60,9 @@ void	*philo_printer(void *ptr)
 		{
 			printf(FORMAT_MSG, queue->time[0][i], queue->philo[0][i], \
 				g_msg[queue->action[0][i]]);
-			if (queue->action[0][i] == DIE || queue->action[0][i] == END)
+			if (queue->action[0][i] == DIE || \
+				queue->action[0][i] == END || \
+				queue->action[0][i] == ERROR)
 				return (NULL);
 			i++;
 		}
@@ -78,6 +81,9 @@ void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg)
 	max = philo->queue->max;
 	if (count >= max - 10)
 	{
+		philo->queue->time[1][count] = time;
+		philo->queue->philo[1][count] = philo->philo_id;
+		philo->queue->action[1][count] = ERROR;
 		pthread_mutex_lock(&philo->public_data->start);
 		philo->public_data->err = true;
 		pthread_mutex_unlock(&philo->public_data->start);
