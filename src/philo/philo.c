@@ -14,9 +14,9 @@
 
 static int	philo_single(t_public info)
 {
-	printf("%d %d has taken a fork\n", 0, 1);
-	usleep(info.time_die * 1000);
-	printf("%d %d died\n", info.time_die, 1);
+	printf(FORMAT_MSG, 0, 1, "has taken a fork");
+	time_sleep_ms(info.time_die);
+	printf(FORMAT_MSG, info.time_die, 1, "died");
 	return (SUCCESS);
 }
 

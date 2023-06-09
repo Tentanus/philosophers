@@ -41,7 +41,7 @@ static bool	check_full_philos(t_philo *philo, t_public *public)
 		public->err = true;
 		time_start = public->time_start;
 		pthread_mutex_unlock(&public->start);
-		philo_queue_message(philo, \
+		philo_queue_message(&philo[nbr_philo - 1], \
 				time_diff_ms(time_start, time_of_day_ms()), END);
 		return (true);
 	}
@@ -65,7 +65,7 @@ static void	philo_watcher(t_philo *philos)
 		pthread_mutex_unlock(&philos[i].eating);
 		if (check_death(diff_time, time_die, &philos[i]))
 			break ;
-		if (check_full_philos(&philos[i], public))
+		if (check_full_philos(philos, public))
 			break ;
 		if (i == (size_t) public->nbr_philo - 1)
 			i = -1;
@@ -86,14 +86,14 @@ static int32_t	philo_thread_create(t_philo *philos, t_public *info, \
 		if (pthread_create(philos[i].thread, NULL, &philo_routine, &philos[i]))
 		{
 			philos[i].public_data->err = true;
-			return (philo_thread_join(philos, i), philo_error(ERR_THR));
+			return (philo_thread_join(philos, i), ERR_THR);
 		}
 		i++;
 	}
 	if (pthread_create(printer, NULL, &philo_printer, philos[0].queue))
 	{
 		philos[i].public_data->err = true;
-		return (philo_thread_join(philos, max_philos), philo_error(ERR_THR));
+		return (philo_thread_join(philos, max_philos), ERR_THR);
 	}
 	return (SUCCESS);
 }

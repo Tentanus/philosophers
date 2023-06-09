@@ -17,9 +17,9 @@ static const char	*g_msg[] = {
 [EAT] = "is eating",
 [SLEEP] = "is sleeping",
 [THINK] = "is thinking",
-[DIE] = "died",
+[DIE] = "died\n\t-=- Ending Simulation -=-",
 [END] = "philos have eaten enough.\n\t-=- Ending Simulation -=-",
-[ERROR] = "ERROR occured during sim"
+[ERROR] = "ERROR occured during sim.\n\t-=- Ending Simulation -=-"
 };
 
 static int32_t	printer_switch_queue(t_msg_queue *queue)
