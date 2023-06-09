@@ -56,7 +56,7 @@ void	*philo_printer(void *ptr)
 		pthread_mutex_lock(&queue->msg_mutex);
 		max_count = printer_switch_queue(queue);
 		pthread_mutex_unlock(&queue->msg_mutex);
-		while (i < max_count)
+		while (i <= max_count)
 		{
 			printf(FORMAT_MSG, queue->time[0][i], queue->philo[0][i], \
 				g_msg[queue->action[0][i]]);
