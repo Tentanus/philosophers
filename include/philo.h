@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/06 13:47:14 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/09 15:35:39 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_msg_queue{
 	int32_t				*philo[2];
 	int32_t				*action[2];
 	int32_t				count;
+	int32_t				max;
 	pthread_mutex_t		msg_mutex;
 }	t_msg_queue;
 
@@ -106,7 +107,8 @@ void	go_think(t_philo *philo, const int64_t sim_start);
 
 void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg);
 
-void	philo_free_philos(t_philo *philos, pthread_mutex_t *forks, size_t limit);
+void	philo_free_philos(t_philo *philos, pthread_mutex_t *forks, \
+		size_t limit);
 void	philo_free_queue(t_msg_queue *queue);
 void	philo_thread_join(t_philo *philos, size_t max_philos);
 

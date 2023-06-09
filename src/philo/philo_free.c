@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/25 18:13:27 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/03 20:03:48 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/09 15:25:52 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	philo_free_philos(t_philo *philos, pthread_mutex_t *forks, size_t limit)
 	size_t			i;
 
 	i = 0;
+	pthread_mutex_destroy(&philos[0].public_data->start);
 	while (i < limit)
 	{
 		pthread_mutex_destroy(philos[i].fork_r);
@@ -29,6 +30,7 @@ void	philo_free_philos(t_philo *philos, pthread_mutex_t *forks, size_t limit)
 
 void	philo_free_queue(t_msg_queue *queue)
 {
+	pthread_mutex_destroy(&queue->msg_mutex);
 	if (queue->time[0] != NULL)
 		free(queue->time[0]);
 	if (queue->time[1] != NULL)
