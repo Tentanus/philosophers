@@ -103,9 +103,11 @@ int32_t	philo_run(t_public *info, t_philo *philos)
 	pthread_t	printer;
 
 	pthread_mutex_lock(&(info->start));
+	pthread_mutex_lock(&philos[0].queue->msg_mutex);
 	if (philo_thread_create(philos, info, &printer) == ERR_THR)
 		return (pthread_mutex_unlock(&(info->start)), ERR_THR);
 	info->time_start = time_of_day_ms();
+	pthread_mutex_unlock(&philos[0].queue->msg_mutex);
 	pthread_mutex_unlock(&(info->start));
 	philo_watcher(philos);
 	philo_thread_join(philos, info->nbr_philo);

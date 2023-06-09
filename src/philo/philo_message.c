@@ -50,13 +50,15 @@ void	*philo_printer(void *ptr)
 	size_t		i;
 
 	queue = ptr;
+	pthread_mutex_lock(&queue->msg_mutex);
+	pthread_mutex_unlock(&queue->msg_mutex);
 	while (1)
 	{
 		i = 0;
 		pthread_mutex_lock(&queue->msg_mutex);
 		max_count = printer_switch_queue(queue);
 		pthread_mutex_unlock(&queue->msg_mutex);
-		while (i <= max_count)
+		while (i < max_count)
 		{
 			printf(FORMAT_MSG, queue->time[0][i], queue->philo[0][i], \
 				g_msg[queue->action[0][i]]);
@@ -79,7 +81,7 @@ void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg)
 	pthread_mutex_lock(&philo->queue->msg_mutex);
 	count = philo->queue->count;
 	max = philo->queue->max;
-	if (count >= max - 10)
+	if (count >= max - 5)
 	{
 		philo->queue->time[1][count] = time;
 		philo->queue->philo[1][count] = philo->philo_id;

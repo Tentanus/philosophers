@@ -59,7 +59,7 @@ void	go_sleep(t_philo *philo, const int64_t sim_start)
 	time_sleep = philo->public_data->time_sleep;
 	pthread_mutex_unlock(&philo->public_data->start);
 	philo_queue_message(philo, time_diff_ms(sim_start, start_sleep), SLEEP);
-	time_sleep_ms(philo->public_data->time_sleep);
+	time_sleep_ms(time_sleep);
 	philo->status = THINK;
 }
 

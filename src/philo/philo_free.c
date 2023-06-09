@@ -12,7 +12,7 @@
 
 #include <philo.h>
 
-void	philo_free_alloc(t_philo *philos, pthread_mutex_t *forks, size_t limit)
+void	philo_free_philos(t_philo *philos, pthread_mutex_t *forks, size_t limit)
 {
 	size_t	i;
 
@@ -20,9 +20,11 @@ void	philo_free_alloc(t_philo *philos, pthread_mutex_t *forks, size_t limit)
 	pthread_mutex_destroy(&philos[0].public_data->start);
 	while (i < limit)
 	{
+		pthread_mutex_destroy(philos[i].fork_r);
 		free(philos[i].thread);
 		i++;
 	}
+	free(forks);
 	free(philos);
 }
 

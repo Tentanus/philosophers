@@ -16,7 +16,8 @@ static const char	*g_err_msg[] = {
 [SUCCESS] = "-",
 [ERR_ARG] = "INCORRECT ARGUMENTS: 4 or 5",
 [ERR_INP] = "INCORRECT INPUT: 1 till INT_MAX",
-[ERR_MEM] = "ALLOCATION ERROR"
+[ERR_MEM] = "ALLOCATION ERROR",
+[ERR_THR] = "THREAD CREATE ERROR"
 };
 
 int	philo_error(int32_t code)
