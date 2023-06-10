@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/06/06 14:05:33 by mweverli      ########   odam.nl          #
+#    Updated: 2023/06/10 11:04:36 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,8 @@ $(DIR_LIST):
 
 $(NAME): $(OBJ)
 	@echo ""
-	@$(COMPILE) $(INCLUDE) $(LIBRARY) $(OBJ) -o $(NAME)
+	$(COMPILE) $(INCLUDE) $(LIBRARY) $(OBJ) -o $(NAME)
+	@echo ""
 	@echo "$(COMPILE) $(INCLUDE) $(LIBRARY) $(CYAN)$(notdir $(OBJ))$(RESET) -o $(NAME)"
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
@@ -123,7 +124,7 @@ re: fclean all
 #============ MISCELLANEOUS =============#
 #========================================#
 
-.PHONY: all clean fclean tclean re test
+.PHONY: all clean fclean re
 
 .DEFAULT_GOAL := all
 
