@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:56:14 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/05 16:39:02 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/10 13:02:48 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 		return (philo_error(ERR_MEM));
 	if (philo_run(&info, philos) != SUCCESS)
 		return (philo_error(ERR_THR));
+	philo_free_philos(philos, philos[0].fork_r, info.nbr_philo);
 	philo_free_queue(&queue);
 	return (SUCCESS);
 }

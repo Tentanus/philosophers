@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 17:47:49 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/06 13:24:56 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/10 12:59:09 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 typedef void				(*t_go_action) \
 							(t_philo *philo, const int64_t sim_start);
 
-static bool	check_err(t_philo *philo)
+bool	check_err(t_public *public_data)
 {
 	bool	ret;
 
-	pthread_mutex_lock(&philo->public_data->start);
-	ret = philo->public_data->err;
-	pthread_mutex_unlock(&philo->public_data->start);
+	pthread_mutex_lock(&public_data->start);
+	ret = public_data->err;
+	pthread_mutex_unlock(&public_data->start);
 	return (ret);
 }
 
@@ -63,7 +63,7 @@ void	*philo_routine(void *ptr)
 	}
 	while (1)
 	{
-		if (check_err(philo))
+		if (check_err(philo->public_data))
 			break ;
 		g_func[philo->status](philo, sim_start);
 	}

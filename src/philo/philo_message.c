@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/09 17:49:19 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/10 12:49:51 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,18 @@ void	*philo_printer(void *ptr)
 {
 	t_msg_queue	*queue;
 	size_t		max_count;
+	size_t		max_queue;
 	size_t		i;
 
 	queue = ptr;
-	pthread_mutex_lock(&queue->msg_mutex);
-	pthread_mutex_unlock(&queue->msg_mutex);
+	max_queue = queue->max;
 	while (1)
 	{
 		i = 0;
 		pthread_mutex_lock(&queue->msg_mutex);
 		max_count = printer_switch_queue(queue);
 		pthread_mutex_unlock(&queue->msg_mutex);
-		while (i < max_count)
+		while (i < max_count && i < max_queue)
 		{
 			printf(FORMAT_MSG, queue->time[0][i], queue->philo[0][i], \
 				g_msg[queue->action[0][i]]);
@@ -83,12 +83,13 @@ void	philo_queue_message(t_philo *philo, int32_t time, t_msg msg)
 	max = philo->queue->max;
 	if (count >= max - 5)
 	{
-		philo->queue->time[1][count] = time;
-		philo->queue->philo[1][count] = philo->philo_id;
-		philo->queue->action[1][count] = ERROR;
 		pthread_mutex_lock(&philo->public_data->start);
 		philo->public_data->err = true;
 		pthread_mutex_unlock(&philo->public_data->start);
+		philo->queue->time[1][count] = time;
+		philo->queue->philo[1][count] = philo->philo_id;
+		philo->queue->action[1][count] = ERROR;
+		(philo->queue->count)++;
 		pthread_mutex_unlock(&philo->queue->msg_mutex);
 		return ;
 	}

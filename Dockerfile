@@ -14,7 +14,7 @@ RUN apt-get -y update \
 	libcriterion-dev \
 	libreadline-dev \
 	strace \
-	man-pages \
+	manpages \
 	less \
 	-y \
 && \

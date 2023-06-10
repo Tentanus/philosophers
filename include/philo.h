@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/05 19:26:08 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/09 17:51:16 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/10 12:57:30 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int32_t	philo_error(int32_t code);
 void	*philo_printer(void *ptr);
 void	*philo_routine(void *ptr);
 
+bool	check_err(t_public *public_data);
 void	go_eat(t_philo *philo, const int64_t sim_start);
 void	go_sleep(t_philo *philo, const int64_t sim_start);
 void	go_think(t_philo *philo, const int64_t sim_start);
