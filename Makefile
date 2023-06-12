@@ -6,7 +6,7 @@
 #    By: mweverli <mweverli@student.codam.n>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/01 17:54:19 by mweverli      #+#    #+#                  #
-#    Updated: 2023/06/10 11:04:36 by mweverli      ########   odam.nl          #
+#    Updated: 2023/06/12 18:27:03 by mweverli      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,10 +68,10 @@ endif
 
 COMPILE		:=	$(CC) $(CFL)
 
-INFO_FL		:=\
-$(if $(findstring -g,$(CFL)),-g)\
-$(if $(findstring thread,$(CFL)),-fsan=thread)\
-$(if $(findstring address,$(CFL)),-fsan=address)\
+INFO_FL		:=										\
+$(if $(findstring -g,$(CFL)),-g)					\
+$(if $(findstring thread,$(CFL)),-fsan=thread)		\
+$(if $(findstring address,$(CFL)),-fsan=address)	\
 $(if $(findstring undefined,$(CFL)),-fsan=undef)
 
 #========================================#
@@ -99,12 +99,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 	@$(COMPILE) $(INCLUDE) -MMD -o $@ -c $< 
-	@echo "$(CYAN)COMPILE $(INFO_FL) $(notdir $<)$(RESET)"
-
-debug:
-	@$(MAKE) DEBUG=1 all
-
-rebug: debug
+	@echo "$(CYAN)COMPILE $(INFO_FL) $(notdir $(<:%.c=%))$(RESET)"
 
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -115,6 +110,11 @@ fclean: clean
 
 re: fclean all
 
+debug:
+	@$(MAKE) DEBUG=1 all
+
+rebug: fclean debug
+
 #========================================#
 #============== LIBRARIES ===============#
 #========================================#
@@ -124,7 +124,7 @@ re: fclean all
 #============ MISCELLANEOUS =============#
 #========================================#
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug rebug
 
 .DEFAULT_GOAL := all
 
