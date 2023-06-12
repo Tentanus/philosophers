@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/12 15:59:05 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/12 18:34:12 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ void	*philo_printer(void *ptr)
 		{
 			printf(FORMAT_MSG, queue->time[0][i], queue->philo[0][i], \
 				g_msg[queue->action[0][i]]);
-			if (queue->action[0][i] == DIE || \
-				queue->action[0][i] == END || \
+			if (queue->action[0][i] == DIE || queue->action[0][i] == END || \
 				queue->action[0][i] == ERROR)
 				return (NULL);
 			i++;
