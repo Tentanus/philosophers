@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/29 15:04:01 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/10 13:03:38 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/12 16:45:02 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int32_t	philo_run(t_public *info, t_philo *philos)
 {
 	pthread_t	printer;
 
-	pthread_mutex_lock(&(info->start));
+	pthread_mutex_lock(&info->start);
 	pthread_mutex_lock(&philos[0].queue->msg_mutex);
 	if (philo_thread_create(philos, info, &printer) == ERR_THR)
 		return (pthread_mutex_unlock(&(info->start)), ERR_THR);

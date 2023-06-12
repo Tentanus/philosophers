@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/06 19:36:12 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/09 15:30:24 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/12 16:07:30 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static int32_t	philo_alloc_queue(t_msg_queue *queue, int32_t nbr_philo)
 		queue->action[1] == NULL)
 		return (philo_free_queue(queue), ERR_MEM);
 	queue->max = size_alloc;
+	queue->count = 0;
 	pthread_mutex_init(&queue->msg_mutex, NULL);
 	return (SUCCESS);
 }

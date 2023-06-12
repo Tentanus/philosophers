@@ -6,7 +6,7 @@
 /*   By: mweverli <mweverli@student.codam.n>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/26 21:15:26 by mweverli      #+#    #+#                 */
-/*   Updated: 2023/06/10 12:49:51 by mweverli      ########   odam.nl         */
+/*   Updated: 2023/06/12 15:59:05 by mweverli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*philo_printer(void *ptr)
 				return (NULL);
 			i++;
 		}
-		time_sleep_ms(1);
+		time_sleep_ms(10);
 	}
 	return (NULL);
 }
