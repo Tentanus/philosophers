@@ -52,8 +52,6 @@ void	*philo_routine(void *ptr)
 	int64_t	sim_start;
 
 	philo = ptr;
-	pthread_mutex_lock(&philo->public_data->start);
-	pthread_mutex_unlock(&philo->public_data->start);
 	if (start_sequence(philo, &sim_start))
 		return (NULL);
 	if (philo->philo_id % 2 == 1)
